@@ -1,8 +1,16 @@
-import React from 'react'
+
+import TryFetch from '@/components/tryFetch'
+
+import React, { useContext } from 'react'
 
 const page = () => {
+
+  
+  
   return (
-    <div>page</div>
+    <div>
+      <TryFetch/>
+    </div>
   )
 }
 
