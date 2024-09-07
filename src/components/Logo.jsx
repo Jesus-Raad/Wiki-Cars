@@ -15,10 +15,10 @@ const Logo = () => {
       <Image
         width={65}
         height={56}
-        src={"/img/enhanced_black_car_image.png"}
+        src={"/img/white_car_image.png"}
         alt={"logo"}
       />
-      <p className={`${kaushanScript.className} text-black italic w-fit `}>Wiki-Cars</p>
+      <p className={`${kaushanScript.className} text-white italic w-fit `}>Wiki-Cars</p>
     </div>
   );
 };
