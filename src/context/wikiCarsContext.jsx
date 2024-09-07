@@ -9,19 +9,21 @@ export default function WikiCarsProvider({ children }) {
   const [model, setModel] = useState("mustang");
   const [year, setYear] = useState("1965");
 
-  // useEffect(() => {
-  //   const fetchCar = async () => {
-  //     try {
-  //       const response = await fetch(`/api/products/getCarData?make=${make}&model=${model}&year=${year}`);
-  //       const data = await response.json();
-  //       setCars(data);  // Asegúrate de guardar los datos correctamente
-  //     } catch (error) {
-  //       console.error('Error fetching car data:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchCar = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/topCars`);
+        const data = await response.json();
+        console.log(data);
+        
+        setCars(data);  // Asegúrate de guardar los datos correctamente
+      } catch (error) {
+        console.error('Error fetching car data:', error);
+      }
+    };
 
-  //   fetchCar();
-  // }, [make, model, year]);
+    fetchCar();
+  }, []);
 
   return (
     <WikiCars.Provider value={{ cars, setCars, make, setMake, model, setModel, year, setYear }}>
