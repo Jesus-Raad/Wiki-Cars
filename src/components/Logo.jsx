@@ -13,7 +13,7 @@ const Logo = ({direction,width,height,sizeText}) => {
   const imgW=width||65
   const imgh=height||56
   return (
-    <div className={direction?"flex  justify-center gap-0 z-50":"flex flex-col justify-center gap-0 z-50"}>
+    <div className={direction?"flex  justify-center gap-0":"flex flex-col justify-center gap-0"}>
       <Image
         width={imgW}
         height={imgh}

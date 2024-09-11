@@ -8,9 +8,9 @@ const linkPath = link || '#'
  
 switch (style) {
   case "black":
-    return  <Link href={linkPath} onClick={action}  className="flex items-center text-center py-3 px-6 min-h-[40px] justify-center max-w-fit text-white rounded font-semibold text-sm leading-4 bg-[#32363A] -z-10">{text}</Link>;
+    return  <Link href={linkPath} onClick={action}  className="flex items-center text-center py-3 px-6 min-h-[40px] justify-center max-w-fit text-white rounded font-semibold text-sm leading-4 bg-[#32363A]">{text}</Link>;
   case "miniBlack":
-    return  <Link href={linkPath} onClick={action}  className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-[#32363A] -z-10">{text}</Link>;
+    return  <Link href={linkPath} onClick={action}  className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-[#32363A] ">{text}</Link>;
   case "green":
     return <Link href={linkPath}  onClick={action} className="flex items-center text-center py-3 px-6 min-h-[40px] justify-center max-w-fit text-white rounded font-semibold text-sm leading-4 bg-[#2a5b45]">{text}</Link>; 
   case "greenBlock":
