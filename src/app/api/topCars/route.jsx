@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { ObjectId } from 'mongodb';
-import clientPromise from '../../../../../lib/mongodb.mjs';
+import clientPromise from '../../../../lib/mongodb.mjs';
 
 // Función auxiliar para añadir encabezados CORS
 const addCorsHeaders=(response)=> {

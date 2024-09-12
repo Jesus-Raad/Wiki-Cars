@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@kinde-oss/kinde-auth-nextjs": "^2.3.8",
     "@next/font": "^14.2.8",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",

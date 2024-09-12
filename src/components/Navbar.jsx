@@ -1,7 +1,8 @@
-
+"use client"
 import React from "react";
 import Logo from "./Logo";
-import { ArrowRightLeft, Search, Star } from "lucide-react";
+import { ArrowRightLeft, Search, Star, User } from "lucide-react";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs";
 
 const Navbar = () => {
   return (
@@ -12,6 +13,7 @@ const Navbar = () => {
         <Star color="#ffffff" />
         <ArrowRightLeft color="#ffffff" />
         <Search color="#ffffff" />
+        <LoginLink><User color="#ffffff"/></LoginLink> 
         </div>
       </div>
     </nav>
