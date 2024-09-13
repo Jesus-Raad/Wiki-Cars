@@ -33,7 +33,11 @@ const InfoUtilsWeb = ({
             <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
               {description}
             </p>
-          <div>{textBtn && <ButtonsCar style={"black"} text={textBtn} link={link} />}</div>
+            <div>
+              {/* {textBtn && (
+                <ButtonsCar style={"black"} text={textBtn} link={link} />
+              )} */}
+            </div>
           </div>
         </div>
       ) : (
@@ -45,7 +49,11 @@ const InfoUtilsWeb = ({
             <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
               {description}
             </p>
-            <div>{textBtn && <ButtonsCar style={"black"} text={textBtn}link={link} />}</div>
+            <div>
+              {/* {textBtn && (
+                <ButtonsCar style={"black"} text={textBtn} link={link} />
+              )} */}
+            </div>
           </div>
           <Image
             className="rounded-xl"

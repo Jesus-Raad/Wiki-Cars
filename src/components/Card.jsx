@@ -75,11 +75,12 @@ const Card = ({ car }) => {
               {car.model_seats}
             </p>
           </div>
-          <div
-           
-            className=" flex justify-center z-10"
-          >
-            <ButtonsCar style={"miniBlack"} text={"Info"}  action={hanldeInfoCar} />
+          <div className=" flex justify-center z-10">
+            {/* <ButtonsCar
+              style={"miniBlack"}
+              text={"Info"}
+              action={hanldeInfoCar}
+            /> */}
           </div>
         </div>
       </div>
