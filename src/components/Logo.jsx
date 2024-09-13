@@ -9,7 +9,7 @@ const kaushanScript = Kaushan_Script({
   subsets: ['latin'], // Puedes elegir los subsets de la fuente, en este caso 'latin'
   display: 'swap', // Mejora la experiencia de carga
 });
-const Logo = ({direction,width,height,sizeText}) => {
+const Logo = ({direction,width,height,darck}) => {
   const imgW=width||65
   const imgh=height||56
   return (
@@ -17,10 +17,10 @@ const Logo = ({direction,width,height,sizeText}) => {
       <Image
         width={imgW}
         height={imgh}
-        src={"/img/white_car_image.png"}
+        src={darck?"/img/enhanced_black_car_image.png":"/img/white_car_image.png"}
         alt={"logo"}
       />
-      <p className={`${kaushanScript.className} text-white italic w-fit `}>Wiki-Cars</p>
+      <p className={darck?`${kaushanScript.className} text-black italic w-fit `:`${kaushanScript.className} text-white italic w-fit `}>Wiki-Cars</p>
     </div>
   );
 };

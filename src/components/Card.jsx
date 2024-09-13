@@ -1,9 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import ButtonsCar from "./buttonsCar";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { Star } from "lucide-react";
+import { WikiCars } from "@/context/wikiCarsContext";
+import { useRouter } from "next/navigation";
+
 const Card = ({ car }) => {
+  const { carInfo, setCarInfo } = useContext(WikiCars);
+
   const [openCard, setOpenCard] = useState(false);
+
+  const router = useRouter();
+
+  const hanldeInfoCar = (event) => {
+    event.preventDefault();
+
+    setCarInfo(car);
+    // router.push('/carInfo')
+  };
+
   const handleCard = () => {
     if (openCard === true) {
       return setOpenCard(false);
@@ -11,6 +28,10 @@ const Card = ({ car }) => {
       return setOpenCard(true);
     }
   };
+
+  const { user, getUser } = useKindeBrowserClient();
+  const alsoUser = getUser();
+
   return (
     <div className=" flex  items-center h-[320px]  ">
       <div
@@ -31,7 +52,10 @@ const Card = ({ car }) => {
         />
 
         <div className="pb-2 px-2  flex flex-col justify-start  text-[#32363A]">
-          <h3 className="text-lg font-bold">{car.model_name}</h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-bold">{car.model_name}</h3>{" "}
+            {user && <Star size={17} color="#ffffff" />}
+          </div>
           <p className="text-sm text-white">{car.model_make_display}</p>
           <div className="mt-4 text-white">
             <p className="text-sm">
@@ -51,8 +75,11 @@ const Card = ({ car }) => {
               {car.model_seats}
             </p>
           </div>
-          <div className=" flex justify-center z-10">
-            <ButtonsCar style={"miniBlack"} text={"Info"} />
+          <div
+           
+            className=" flex justify-center z-10"
+          >
+            <ButtonsCar style={"miniBlack"} text={"Info"}  action={hanldeInfoCar} />
           </div>
         </div>
       </div>

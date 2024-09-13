@@ -5,9 +5,8 @@ export const WikiCars = createContext(null);
 
 export default function WikiCarsProvider({ children }) {
   const [cars, setCars] = useState([]);
-  const [make, setMake] = useState("ford");
-  const [model, setModel] = useState("mustang");
-  const [year, setYear] = useState("1965");
+  const [carInfo, setCarInfo] = useState({});
+  const [visibleMenuCondition,setVisibleMenuCondition]=useState(false)
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -26,7 +25,7 @@ export default function WikiCarsProvider({ children }) {
   }, []);
 
   return (
-    <WikiCars.Provider value={{ cars, setCars, make, setMake, model, setModel, year, setYear }}>
+    <WikiCars.Provider value={{ cars, setCars, carInfo, setCarInfo,visibleMenuCondition,setVisibleMenuCondition }}>
       {children}
     </WikiCars.Provider>
   );

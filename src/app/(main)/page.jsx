@@ -7,7 +7,7 @@ import LogosMerchsSections from "./LogosMerchsSections";
 const page = () => {
   return (
     <>
-      <video autoPlay loop muted width="100%">
+      <video className="mt-16"  autoPlay loop muted width="100%">
         <source
           src="/videos/y2mate.com - Dodge Challenger Hellcat SRT Redeye Widebody  The Ultimate Muscle Car challenger hellcat redeye_1440p.mp4"
           type="video/mp4"
