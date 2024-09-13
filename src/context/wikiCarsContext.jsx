@@ -11,7 +11,7 @@ export default function WikiCarsProvider({ children }) {
   useEffect(() => {
     const fetchCar = async () => {
       try {
-        const response = await fetch(`https://wiki-cars-5na2srk14-jesus-raads-projects.vercel.app/api/topCars`);
+        const response = await fetch(`https://wiki-cars.vercel.app/api/topCars`);
         const data = await response.json();
         console.log(data);
         
