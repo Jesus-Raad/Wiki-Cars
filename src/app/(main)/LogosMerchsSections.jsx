@@ -5,12 +5,12 @@ import React from "react";
 const LogosMerchsSections = () => {
   const logo = [
     "/img/audiLogo.svg",
-    "/img/BMWLOGO.svg",
+    "/img/bmwLogo.svg",
     "/img/fordLogo.svg",
     "/img/hondaLogo.svg",
-    "/img/HyundaiLogo.svg",
+    "/img/hyundaiLogo.svg",
     "/img/mercedesLogo.svg",
-    "/img/NissanLogo.svg",
+    "/img/nissanLogo.svg",
     "/img/toyotaLogo.svg",
     "/img/volkswagenLogo.svg",
     "/img/chevroletLogo.svg"
