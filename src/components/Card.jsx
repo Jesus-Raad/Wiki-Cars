@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext, useState } from "react";
 import Image from "next/image";
-import ButtonsCar from "./buttonsCar";
+import ButtonsCar from "./ButtonsCar";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Star } from "lucide-react";
 import { WikiCars } from "@/context/wikiCarsContext";
@@ -76,11 +76,11 @@ const Card = ({ car }) => {
             </p>
           </div>
           <div className=" flex justify-center z-10">
-            {/* <ButtonsCar
+            <ButtonsCar
               style={"miniBlack"}
               text={"Info"}
               action={hanldeInfoCar}
-            /> */}
+            />
           </div>
         </div>
       </div>

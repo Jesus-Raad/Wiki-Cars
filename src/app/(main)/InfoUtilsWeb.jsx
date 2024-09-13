@@ -1,4 +1,4 @@
-import ButtonsCar from "@/components/buttonsCar";
+import ButtonsCar from "@/components/ButtonsCar";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -34,9 +34,9 @@ const InfoUtilsWeb = ({
               {description}
             </p>
             <div>
-              {/* {textBtn && (
+              {textBtn && (
                 <ButtonsCar style={"black"} text={textBtn} link={link} />
-              )} */}
+              )}
             </div>
           </div>
         </div>
