@@ -123,9 +123,7 @@ const Navbar = () => {
               <div className="sm:flex sm:gap-4">
                 {!isAuthenticated ? (
                   <LoginLink>
-                    <button className="rounded-md bg-[#6b7280] px-5 py-2.5 text-sm font-medium text-white shadow">
-                      Iniciar Sesión
-                    </button>
+                 <ButtonsCar style={"gray"} text={"Iniciar Sesión"}/>
                   </LoginLink>
                 ) : (
                   <Image

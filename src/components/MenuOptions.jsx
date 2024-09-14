@@ -5,7 +5,6 @@ import React from "react";
 
 const MenuOptions = ({ visible,action }) => {
   const { user, getUser } = useKindeBrowserClient();
-  console.log(user);
 
   return (
     <div

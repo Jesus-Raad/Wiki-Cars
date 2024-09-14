@@ -7,9 +7,9 @@ export default function WikiCarsProvider({ children }) {
   const [cars, setCars] = useState([]);
   const [carInfo, setCarInfo] = useState({});
   const [visibleMenuCondition,setVisibleMenuCondition]=useState(false)
-const [yearCar,setYearCar]=useState("1969")
-const [makerCar,setMakerCar]=useState("ford")
-const [modelCar,setModelCar]=useState("mustang")
+const [yearCar,setYearCar]=useState("")
+const [makerCar,setMakerCar]=useState("")
+const [modelCar,setModelCar]=useState("")
 const [IsSearchSection,setIsSearchSection]=useState(false)
   useEffect(() => {
     const fetchCar = async () => {
