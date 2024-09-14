@@ -3,7 +3,7 @@ import { ArrowRightLeft, LogOut, Search, Star, User } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-const MenuOptions = ({ visible }) => {
+const MenuOptions = ({ visible,action }) => {
   const { user, getUser } = useKindeBrowserClient();
   console.log(user);
 
@@ -39,7 +39,7 @@ const MenuOptions = ({ visible }) => {
                 Comparador
               </p>
             </div>
-            <div className="flex w-fit gap-2">
+            <div onClick={action} className="flex w-fit gap-2">
               <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
               <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
                 Buscar coche

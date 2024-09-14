@@ -7,7 +7,10 @@ export default function WikiCarsProvider({ children }) {
   const [cars, setCars] = useState([]);
   const [carInfo, setCarInfo] = useState({});
   const [visibleMenuCondition,setVisibleMenuCondition]=useState(false)
-
+const [yearCar,setYearCar]=useState("1969")
+const [makerCar,setMakerCar]=useState("ford")
+const [modelCar,setModelCar]=useState("mustang")
+const [IsSearchSection,setIsSearchSection]=useState(false)
   useEffect(() => {
     const fetchCar = async () => {
       try {
@@ -25,7 +28,7 @@ export default function WikiCarsProvider({ children }) {
   }, []);
 
   return (
-    <WikiCars.Provider value={{ cars, setCars, carInfo, setCarInfo,visibleMenuCondition,setVisibleMenuCondition }}>
+    <WikiCars.Provider value={{ cars, setCars, carInfo, setCarInfo,visibleMenuCondition,setVisibleMenuCondition,modelCar,setModelCar,makerCar,setMakerCar,yearCar,setYearCar,IsSearchSection,setIsSearchSection }}>
       {children}
     </WikiCars.Provider>
   );
