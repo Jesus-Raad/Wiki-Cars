@@ -123,7 +123,7 @@ const Navbar = () => {
               <div className="sm:flex sm:gap-4">
                 {!isAuthenticated ? (
                   <LoginLink>
-                 <ButtonsCar style={"gray"} text={"Iniciar Sesión"}/>
+                <button className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-[#6b7280] "> Iniciar Sesión</button>
                   </LoginLink>
                 ) : (
                   <Image
@@ -145,7 +145,7 @@ const Navbar = () => {
       </div>
 
       <SearcFilter />
-      <MenuOptions visible={visibleMenuCondition} action={handleSearchSectionVisible} />
+      <MenuOptions  action={handleSearchSectionVisible} />
     </nav>
   );
 };

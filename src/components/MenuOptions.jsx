@@ -1,15 +1,16 @@
-import { LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { WikiCars } from "@/context/wikiCarsContext";
+import { LoginLink, LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ArrowRightLeft, LogOut, Search, Star, User } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 
-const MenuOptions = ({ visible,action }) => {
+const MenuOptions = ({ action }) => {
   const { user, getUser } = useKindeBrowserClient();
-
+const { visibleMenuCondition}=useContext(WikiCars)
   return (
     <div
       className={
-        visible
+        visibleMenuCondition
           ? " flex flex-col absolute min-w-[150px] min-h-28 bg-[white]  gap-5 p-2  border-solid border-b-[1px] right-4 top-[63px] md:hidden"
           : " flex flex-col absolute min-w-[114px] max-h-[391.37px] min-h-[90px] bg-[white] invisible gap-5 p-2 rounded-lg  border-solid border-[1px] right top-[64px]"
       }
@@ -32,13 +33,13 @@ const MenuOptions = ({ visible,action }) => {
                 Favoritos
               </p>
             </div>
-            <div className="flex w-fit gap-2">
+            <div className="cursor-pointer flex w-fit gap-2">
               <ArrowRightLeft size={15} strokeWidth={1.25} color="#6b7280" />{" "}
               <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
                 Comparador
               </p>
             </div>
-            <div onClick={action} className="flex w-fit gap-2">
+            <div onClick={action} className="cursor-pointer flex w-fit gap-2">
               <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
               <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
                 Buscar coche
@@ -63,7 +64,7 @@ const MenuOptions = ({ visible,action }) => {
           Comparador
         </p>
       </div>
-      <div className="flex w-fit gap-2">
+      <div onClick={action} className="flex w-fit gap-2">
         <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
         <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
           Buscar coche
@@ -77,9 +78,11 @@ const MenuOptions = ({ visible,action }) => {
           Favoritos 
         </p>
         </div>
-        <p className=" text-center text-[#dc2626] max-w-[100px]  text-xs font-thin leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
+        <LoginLink>
+        <p className=" cursor-pointer text-center text-[#dc2626] max-w-[100px]  text-xs font-thin leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
           Inicia sesión Primero
         </p>
+        </LoginLink>
       </div>
     </div>
       }
