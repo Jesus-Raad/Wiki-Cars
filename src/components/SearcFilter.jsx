@@ -130,7 +130,7 @@ console.log(finishFilter);
             list="year-options"
             placeholder="Año de fabricacion"
             {...register("year")}
-            className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 w-56 sm:w-auto"
+            className="bg-gray-200 text-gray-700 text-center p-2 rounded-md outline-none focus:ring focus:ring-gray-300 w-56 sm:w-auto"
           />
           <datalist id="year-options">
             {availableYears.map((year) => (
@@ -146,7 +146,7 @@ console.log(finishFilter);
             list="modelOptions"
             placeholder="Modelo del coche"
             {...register("model")}
-            className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 w-56 sm:w-auto"
+            className="bg-gray-200 text-gray-700 text-center p-2 rounded-md outline-none focus:ring focus:ring-gray-300 w-56 sm:w-auto"
           />
           <datalist id="modelOptions">
             {availableModels.map((model) => (

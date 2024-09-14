@@ -58,13 +58,13 @@ const { visibleMenuCondition}=useContext(WikiCars)
       ) : 
       <div className="flex flex-col gap-2 pl-2">
       
-      <div className="flex w-fit gap-2">
+      <div className="cursor-pointer flex w-fit gap-2">
         <ArrowRightLeft size={15} strokeWidth={1.25} color="#6b7280" />{" "}
         <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
           Comparador
         </p>
       </div>
-      <div onClick={action} className="flex w-fit gap-2">
+      <div onClick={action} className=" cursor-pointer flex w-fit gap-2">
         <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
         <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
           Buscar coche
