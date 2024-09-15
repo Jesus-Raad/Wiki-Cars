@@ -1,8 +1,11 @@
 import React from 'react'
+import AnimateSection from './AnimateSection'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <AnimateSection/>
+    </div>
   )
 }
 

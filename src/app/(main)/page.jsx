@@ -32,7 +32,7 @@ const page = () => {
         description={
           "Si estás interesado en obtener una descripción comparativa y detallada de un vehículo, te ofrezco la posibilidad de analizar y comparar modelos, verciones y marcas."
         }
-        link={"https://github.com/"}
+        link={"/carsComparator"}
         
       />
       <CarsSections acc={10} />
