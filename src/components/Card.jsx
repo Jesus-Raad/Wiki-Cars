@@ -6,9 +6,9 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Info, Star } from "lucide-react";
 import { WikiCars } from "@/context/wikiCarsContext";
 import { useRouter } from "next/navigation";
-import { disconnect } from "mongoose";
 
-const Card = ({ animationComp, generic, car, changeSide }) => {
+
+const Card = ({ animationComp, generic, car, changeSide,changeFirstChoice }) => {
   const { carInfo, setCarInfo, firstChoice,
     setFirstChoice,
     secondChoice,
@@ -19,6 +19,13 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
     }
     const handleSecondChoice=()=>{
       setSecondChoice(car)
+    }
+    const handleChoice=()=>{
+      if (firstChoice) {
+        setSecondChoice(car)
+      } else {
+        setFirstChoice(car)
+      }
     }
 
   const [openCard, setOpenCard] = useState(false);
@@ -39,19 +46,17 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
       return setOpenCard(true);
     }
   };
+  
+  const handleChangeBottom = (event) => {
+    event.preventDefault();
+   router.push('/allCarsList')
+  };
 
+  
   const { user, getUser } = useKindeBrowserClient();
   const alsoUser = getUser();
 
-  const peso = parseInt(car.model_weight_kg);
-  const potencia = parseInt(car.model_engine_power_ps);
-
-  const calcularAceleracion = (peso, potencia) => {
-    if (!peso || !potencia) return "N/D";
-    const aceleracion = peso / potencia;
-    return aceleracion.toFixed(2);
-  };
-  const aceleracion = calcularAceleracion(peso, potencia) + " Kph";
+  
 
 
   return (
@@ -101,13 +106,12 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
                 </p>
               </div>
               <div className=" flex justify-between items-center  z-10">
-                <button onClick={handleFirstChoice} className="flex text-white text-sm justify-center items-center p-2 w-6 h-6 rounded-full  bg-[#32363A]">1</button>
-                <ButtonsCar
-                  style={"miniBlack"}
-                  text={"Info"}
-                  action={hanldeInfoCar}
-                />
-                <button onClick={handleSecondChoice} className="flex text-white text-sm justify-center items-center p-2 w-6 h-6 rounded-full  bg-[#32363A]">2</button>
+                <div className="w-fit cursor-pointer">
+
+                <Info  onClick={hanldeInfoCar}  color="#6b7280"/>
+                </div>
+                <button onClick={handleChoice} className="flex text-white text-sm justify-center items-center px-2 rounded-full  bg-[#32363A]">Comparate</button>
+              
               </div>
             </div>
           </div>
@@ -115,14 +119,11 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
       )}
       {animationComp && (
         <div
-          className={
-            changeSide
-              ? " flex flex-col items-center  pb-8  "
-              : "flex  flex-col items-center pb-8"
-          }
+          className="flex  flex-col items-center justify-center  h-fit sticky top-16 "
+          
         >
           
-            <article className="relative w-[200px] max-h-[500px] m-0 sm:w-[250px] md:max-h-[400px] lg:h-screen lg:min-w-[400px] overflow-hidden transition-all duration-[3s] ease-[ease]   ">
+            <article className="relative w-[200px] max-h-[500px]  sm:w-[250px] md:max-h-[400px] lg:h-[700px] lg:min-w-[400px] overflow-hidden transition-all duration-[3s] ease-[ease]   ">
               <style jsx>{`
                 article::before {
                   content: "";
@@ -146,7 +147,7 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
               `}</style>
               <div className="h-full ">
                 <Image
-                  className=" shadow-[0_60px_60px_-60px_rgba(0,30,255,0.5)]  object-cover  w-full h-full"
+                  className=" shadow-[0_60px_60px_-60px_rgba(0,30,255,0.5)]  object-cover bottom-0 w-full h-full"
                   width={768}
                   height={768}
                   src={`/img/${car.model_name}${car.model_year}vertical.jpg`}
@@ -169,119 +170,18 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
             </div>
             </div>
            
-          <div className={changeSide?"flex flex-col items-center gap-2  w-fit    ":"flex flex-col items-center gap-2  w-fit   "}>
+          <div className={"flex flex-col items-center gap-2  w-fit   "}>
             <Image
               width={100}
               height={50}
               src={`/img/${car.make_display.toLowerCase()}Logo.svg`}
               alt={"logo"}
-              sizes=" (max-width: 100px) 50vw, 25vw"
+              
               objectFit="cover"
             />
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Año
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_year ? car.model_year : "N/D"}
-              </p>
-          
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Tipo de combustible
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_engine_fuel ? car.model_engine_fuel : "N/D"}
-              </p>
-            
-              <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Transmisión
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_transmission_type
-                  ? car.model_transmission_type
-                  : "N/D"}
-              </p>
-           
-
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Ancho{" "}
-            </h1>
-
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_width_mm ? `${car.model_width_mm} mm` : "N/D"}
-              </p>
-           
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Longitud{" "}
-            </h1>
-
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_length_mm ? `${car.model_length_mm} mm` : "N/D"}
-              </p>
-           
-              <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Peso{" "}
-            </h1>
-
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_weight_kg ? `${car.model_weight_kg} Kg` : "N/D"}
-              </p>
-           
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Potencia
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_engine_power_ps
-                  ? `${car.model_engine_power_ps} PS`
-                  : "N/D"}
-              </p>
-            
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Aceleracion
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_weight_kg &&
-                  car.model_engine_power_ps &&
-                  aceleracion}
-              </p>
-           
-
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Velocidad Maxima
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_top_speed_kph
-                  ? `${car.model_top_speed_kph} KPH`
-                  : "N/D"}
-              </p>
-            
-
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Tiempo de 0 a 100 kph (s)
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_0_to_100_kph ? `${car.model_0_to_100_kph} s` : "N/D"}
-              </p>
-           
-
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4 lg:text-3xl lg:font-bold lg:leading-5">
-              Capacidad del tanque (L)
-            </h1>
-            
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {car.model_fuel_cap_l ? `${car.model_fuel_cap_l} L` : "N/D"}
-              </p>
             
           </div>
+<ButtonsCar style={"gray"} action={handleChangeBottom} text={"Cambiar"}/>
         </div>
       )}
     </>

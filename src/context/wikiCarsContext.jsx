@@ -97,6 +97,7 @@ export default function WikiCarsProvider({ children }) {
   const [yearCar, setYearCar] = useState("");
   const [makerCar, setMakerCar] = useState("");
   const [modelCar, setModelCar] = useState("");
+  const [finishFilter, setFinishFilter] = useState([]);
   useEffect(() => {
     const fetchCar = async () => {
       try {
@@ -135,7 +136,7 @@ export default function WikiCarsProvider({ children }) {
         firstChoice,
         setFirstChoice,
         secondChoice,
-        setSecondChoice,
+        setSecondChoice,finishFilter, setFinishFilter
       }}
     >
       {children}

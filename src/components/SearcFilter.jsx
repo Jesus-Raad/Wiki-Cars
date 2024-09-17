@@ -17,6 +17,7 @@ const SearcFilter = () => {
     cars,
     IsSearchSection,
     setIsSearchSection,
+    finishFilter, setFinishFilter
   } = useContext(WikiCars);
 
   const [availableYears, setAvailableYears] = useState([]);
@@ -69,7 +70,7 @@ const SearcFilter = () => {
     setAvailableModels(Array.from(new Set(models)));
   }, [makerCar, yearCar, cars]);
   /////////////////////////////////
-  const [finishFilter, setFinishFilter] = useState([]);
+ 
 
   useEffect(() => {
     let filteredCars = [];
@@ -123,7 +124,7 @@ console.log(finishFilter);
             id="marca"
             className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
           >
-            <option value="" disabled selected>
+            <option value=""  selected>
               Fabricante
             </option>
             {makers.map((marca) => (
@@ -140,8 +141,8 @@ console.log(finishFilter);
             id="year"
             className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
           >
-            <option value="" disabled selected>
-              Año de fabricación
+            <option value=""  selected>
+              Año 
             </option>
             {years.map((year) => (
               <option key={year} value={year}>

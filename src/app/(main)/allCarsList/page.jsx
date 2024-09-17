@@ -1,12 +1,10 @@
 import React from 'react'
-import AnimateSection from './AnimateSection'
-
+import ListSection from './ListSection'
 
 const page = () => {
   return (
     <div>
-      <AnimateSection/>
-  
+       <ListSection/>
     </div>
   )
 }
