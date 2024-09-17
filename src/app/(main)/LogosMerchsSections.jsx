@@ -9,7 +9,7 @@ const LogosMerchsSections = () => {
     "/img/fordLogo.svg",
     "/img/hondaLogo.svg",
     "/img/hyundaiLogo.svg",
-    "/img/mercedesLogo.svg",
+    "/img/mercedes-benzLogo.svg",
     "/img/nissanLogo.svg",
     "/img/toyotaLogo.svg",
     "/img/volkswagenLogo.svg",

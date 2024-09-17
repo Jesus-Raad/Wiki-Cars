@@ -6,11 +6,7 @@ module.exports = {
     './components/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {
-      transform: {
-        '3d-hover': 'perspective(250px) rotateX(10deg) translateY(-5%) translateZ(0)',
-      }
-    },
+    extend: {},
   },
   plugins: [],
 };

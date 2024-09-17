@@ -1,32 +1,25 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Logo from "./Logo";
-import {
-  ArrowRightLeft,
-  LogOut,
-  Menu,
-  MenuIcon,
-  Search,
-  Star,
-  User,
-} from "lucide-react";
+import { LogOut, MenuIcon, Search } from "lucide-react";
 import {
   LoginLink,
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
 import Image from "next/image";
-import Link from "next/link";
-import ButtonsCar from "./ButtonsCar";
+
 import { WikiCars } from "@/context/wikiCarsContext";
 import MenuOptions from "./MenuOptions";
 import SearcFilter from "./SearcFilter";
+import Link from "next/link";
 
 const Navbar = () => {
   const { isAuthenticated } = useKindeBrowserClient();
 
   const { user, getUser } = useKindeBrowserClient();
   const alsoUser = getUser();
+console.log(user);
 
   const {
     visibleMenuCondition,
@@ -44,22 +37,21 @@ const Navbar = () => {
     }
   };
 
-  const handleSearchSectionVisible=()=>{
+  const handleSearchSectionVisible = () => {
     if (IsSearchSection === true) {
       setIsSearchSection(false);
     } else {
       setVisibleMenuCondition(false);
       setIsSearchSection(true);
     }
-    
-  }
+  };
 
   return (
-    <nav className="bg-white fixed z-50 top-0 w-screen ">
+    <nav className="bg-white fixed z-50 top-0 w-screen shadow-xl">
       <div className=" w-screen px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
-            <Logo width={65} height={56} darck={true} />
+          <Link href={"/"}><Logo width={65} height={56} darck={true} /></Link> 
           </div>
 
           <div className="md:flex md:items-center md:gap-12">
@@ -71,18 +63,21 @@ const Navbar = () => {
                     href="#"
                   >
                     {" "}
-                    <Search onClick={handleSearchSectionVisible} color="#6b7280" />{" "}
+                    <Search
+                      onClick={handleSearchSectionVisible}
+                      color="#6b7280"
+                    />{" "}
                   </div>
                 </li>
 
                 <li>
-                  <div
+                  <Link
                     className="text-gray-500 transition hover:text-gray-500/75"
-                    href="#"
+                    href="/carsComparator"
                   >
                     {" "}
                     Comparador{" "}
-                  </div>
+                  </Link>
                 </li>
 
                 <li>
@@ -123,7 +118,10 @@ const Navbar = () => {
               <div className="sm:flex sm:gap-4">
                 {!isAuthenticated ? (
                   <LoginLink>
-                <button className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-[#6b7280] "> Iniciar Sesión</button>
+                    <button className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-[#6b7280] ">
+                      {" "}
+                      Iniciar Sesión
+                    </button>
                   </LoginLink>
                 ) : (
                   <Image
@@ -145,7 +143,7 @@ const Navbar = () => {
       </div>
 
       <SearcFilter />
-      <MenuOptions  action={handleSearchSectionVisible} />
+      <MenuOptions action={handleSearchSectionVisible} />
     </nav>
   );
 };

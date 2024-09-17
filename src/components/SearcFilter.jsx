@@ -31,6 +31,7 @@ const SearcFilter = () => {
   const { register, handleSubmit, watch } = useForm();
 
   const makers = Array.from(new Set(cars.map((car) => car.make_display)));
+  const years = Array.from(new Set(cars.map((car) => car.model_year)));
 
   setMakerCar(watch("marca"));
   setYearCar(watch("year"));
@@ -89,7 +90,15 @@ const SearcFilter = () => {
      else if (makerCar&& modelCar) {
       filteredCars = cars.filter((car) => car.make_display === makerCar&&car.model_name===modelCar);
     }
-
+     else if ( modelCar) {
+      filteredCars = cars.filter((car) => car.model_name===modelCar);
+    }
+     else if (makerCar) {
+      filteredCars = cars.filter((car) => car.make_display === makerCar);
+    }
+    else if (yearCar) {
+      filteredCars = cars.filter((car) => car.model_year === yearCar);
+    }
      
     setFinishFilter(filteredCars);
   }, [makerCar, yearCar,modelCar, cars]);
@@ -125,20 +134,22 @@ console.log(finishFilter);
           </select>
         </div>
         <div className=" flex justify-center w-full sm:w-auto">
-          <input
-            type="number"
-            list="year-options"
-            placeholder="Año de fabricacion"
+        <div className="">
+          <select
             {...register("year")}
-            className="bg-gray-200 text-gray-700 text-center p-2 rounded-md outline-none focus:ring focus:ring-gray-300 w-56 sm:w-auto"
-          />
-          <datalist id="year-options">
-            {availableYears.map((year) => (
+            id="year"
+            className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
+          >
+            <option value="" disabled selected>
+              Año de fabricación
+            </option>
+            {years.map((year) => (
               <option key={year} value={year}>
                 {year}
               </option>
             ))}
-          </datalist>
+          </select>
+        </div>
         </div>
         <div className=" flex justify-center w-full sm:w-auto">
           <input

@@ -7,7 +7,7 @@ import LogosMerchsSections from "./LogosMerchsSections";
 const page = () => {
   return (
     <>
-      <video className="mt-16"  autoPlay loop muted width="100%">
+      <video className="mt-16 sticky sm:m-0"  autoPlay loop muted width="100%">
         <source
           src="/videos/y2mate.com - Dodge Challenger Hellcat SRT Redeye Widebody  The Ultimate Muscle Car challenger hellcat redeye_1440p.mp4"
           type="video/mp4"
@@ -30,7 +30,7 @@ const page = () => {
         img={"/img/porsche1-11.jpg"}
         title={"Comparación de coches"}
         description={
-          "Si estás interesado en obtener una descripción comparativa y detallada de un vehículo, te ofrezco la posibilidad de analizar y comparar modelos, verciones y marcas."
+          "Si estás interesado en obtener una descripción comparativa y detallada de un vehículo, te ofrezco la posibilidad de analizar y comparar modelos, verciones y marcas. Solo tienes que pinchar en las opciones 1 y 2 que salen junto con la informacion de los coches, el 1 para el primer coche y el 2 para el segundo."
         }
         link={"/carsComparator"}
         

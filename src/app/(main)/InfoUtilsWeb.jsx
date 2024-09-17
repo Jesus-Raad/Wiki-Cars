@@ -17,14 +17,16 @@ const InfoUtilsWeb = ({
     <>
       {changeSide ? (
         <div className="flex flex-col  justify-center mx-5 py-3 items-center w-fit gap-8 sm:flex-row md:flex-row lg:flex-row">
+ <div className="lg:w-[800px]">
           <Image
             className="rounded-xl"
             width={600}
             height={254}
             src={img}
             alt={"imgDescription"}
-            sizes=" (max-width: 768px) 50vw, 25vw"
+           
           />
+         </div>
 
           <div className="flex flex-col w-fit gap-3">
           <h2 className="text-[#b0b5bf] text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-9">
@@ -55,14 +57,17 @@ const InfoUtilsWeb = ({
               )}
             </div>
           </div>
+          <div className="lg:w-[800px]">
+
           <Image
             className="rounded-xl"
             width={600}
             height={254}
             src={img}
             alt={"imgDescription"}
-            sizes=" (max-width: 768px) 50vw, 25vw"
+            
           />
+          </div>
         </div>
       )}
     </>
