@@ -15,7 +15,7 @@ function AnimateSection() {
       <div className="flex  flex-col items-center mt-16  ">
         <div className="flex  ">
 
-          <Card animationComp={true} changeSide={true} car={firstChoice} changeFirstChoice={true} />{" "}
+          <Card animationComp={true} changeSide={true} car={firstChoice}  />{" "}
           <StatasSection />
           <Card animationComp={true} car={secondChoice} />
         </div>

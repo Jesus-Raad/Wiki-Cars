@@ -8,25 +8,22 @@ import { WikiCars } from "@/context/wikiCarsContext";
 import { useRouter } from "next/navigation";
 
 
-const Card = ({ animationComp, generic, car, changeSide,changeFirstChoice }) => {
+const Card = ({ animationComp, generic, car, changeSide, }) => {
   const { carInfo, setCarInfo, firstChoice,
     setFirstChoice,
     secondChoice,
-    setSecondChoice, } = useContext(WikiCars);
+    setSecondChoice, changeForS, setChangeForS} = useContext(WikiCars);
 
     const handleFirstChoice=()=>{
       setFirstChoice(car)
+      router.push('/carsComparator')
     }
     const handleSecondChoice=()=>{
       setSecondChoice(car)
+      router.push('/carsComparator')
+
     }
-    const handleChoice=()=>{
-      if (firstChoice) {
-        setSecondChoice(car)
-      } else {
-        setFirstChoice(car)
-      }
-    }
+   
 
   const [openCard, setOpenCard] = useState(false);
 
@@ -46,9 +43,15 @@ const Card = ({ animationComp, generic, car, changeSide,changeFirstChoice }) => 
       return setOpenCard(true);
     }
   };
-  
+  /////////////////////////
   const handleChangeBottom = (event) => {
     event.preventDefault();
+if (changeSide) {
+  setChangeForS(true)
+  
+}else{
+  setChangeForS(false)
+}
    router.push('/allCarsList')
   };
 
@@ -110,7 +113,7 @@ const Card = ({ animationComp, generic, car, changeSide,changeFirstChoice }) => 
 
                 <Info  onClick={hanldeInfoCar}  color="#6b7280"/>
                 </div>
-                <button onClick={handleChoice} className="flex text-white text-sm justify-center items-center px-2 rounded-full  bg-[#32363A]">Comparate</button>
+                <button onClick={changeForS?handleFirstChoice:handleSecondChoice} className="flex text-white text-sm justify-center items-center px-2 rounded-full  bg-[#32363A]">Comparate</button>
               
               </div>
             </div>
