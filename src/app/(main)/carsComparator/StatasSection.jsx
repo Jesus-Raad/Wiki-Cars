@@ -19,17 +19,17 @@ const StatasSection = ({mobileVew}) => {
   };
   const aceleracion1 =
     calcularAceleracion(
-      parseInt(firstChoice.model_weight_kg),
-      parseInt(firstChoice.model_engine_power_ps)
+      parseInt(firstChoice?.model_weight_kg),
+      parseInt(firstChoice?.model_engine_power_ps)
     ) + " Kph";
   const aceleracion2 =
     calcularAceleracion(
-      parseInt(secondChoice.model_weight_kg),
-      parseInt(secondChoice.model_engine_power_ps)
+      parseInt(secondChoice?.model_weight_kg),
+      parseInt(secondChoice?.model_engine_power_ps)
     ) + " Kph";
   return (
 <div className={!mobileVew?"hidden lg:flex flex-col items-center gap-8  w-fit m-4   ":"flex flex-col items-center gap-8  w-fit m-4 lg:hidden  "}>
-<div className="flex flex-col gap-4 items-center">
+{firstChoice&&secondChoice&&<> <div className="flex flex-col gap-4 items-center">
 
       <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
         Año
@@ -234,7 +234,7 @@ Combustible
             : "N/D"}
         </p>
         </div>
-      </div>
+      </div> </>}
     </div>
   );
 };

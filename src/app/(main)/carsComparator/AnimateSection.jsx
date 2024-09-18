@@ -12,7 +12,7 @@ function AnimateSection() {
     useContext(WikiCars);
   return (
     <>
-      <div className="flex  flex-col items-center mt-16  ">
+      <div className={firstChoice&&secondChoice?"flex  flex-col items-center   ":"flex  flex-col items-center  justify-center mt-16 h-screen"}>
         <div className="flex  ">
 
           <Card animationComp={true} changeSide={true} car={firstChoice}  />{" "}
