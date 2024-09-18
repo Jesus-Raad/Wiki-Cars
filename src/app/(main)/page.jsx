@@ -22,7 +22,7 @@ const page = () => {
           "Si buscas información detallada de un vehículo específico, estamos aquí para ayudarte. Te proporcionamos una descripción completa de las características y especificaciones clave."
         }
         img={"/img/cocheBlack.jpg"}
-        link={"https://github.com/"}
+        link={"/allCarsList"}
       />
       <InfoUtilsWeb
         textBtn={"Comencemos"}

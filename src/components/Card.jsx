@@ -24,7 +24,12 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
     router.push("/carsComparator");
   };
   const handleSecondChoice = () => {
-    setSecondChoice(car);
+    if (!firstChoice) {
+      setFirstChoice(car)
+    } else {
+      
+      setSecondChoice(car);
+    }
     router.push("/carsComparator");
   };
 
@@ -108,7 +113,7 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
               </div>
               <div className=" flex justify-between items-center  z-10">
                 <div className="w-fit cursor-pointer">
-                  <Info onClick={hanldeInfoCar} color="#6b7280" />
+                  <Info onClick={hanldeInfoCar} color="#ef4444" />
                 </div>
                 <button
                   onClick={changeForS ? handleFirstChoice : handleSecondChoice}
@@ -178,7 +183,7 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
                 className={changeSide ? "w-full" : " flex w-full justify-end"}
               >
                 <div className=" w-fit cursor-pointer">
-                  <Info poin onClick={hanldeInfoCar} color="#6b7280" />
+                  <Info poin onClick={hanldeInfoCar} color="#ef4444" />
                 </div>
               </div>
               <div className={"flex flex-col items-center gap-2  w-fit   "}>

@@ -47,11 +47,11 @@ console.log(user);
   };
 
   return (
-    <nav className="bg-white fixed z-50 top-0 w-screen shadow-xl">
+    <nav className="bg-[#6b7280] fixed z-50 top-0 w-screen shadow-xl">
       <div className=" w-screen px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
-          <Link href={"/"}><Logo width={65} height={56} darck={true} /></Link> 
+          <Link href={"/"}><Logo width={65} height={56} /></Link> 
           </div>
 
           <div className="md:flex md:items-center md:gap-12">
@@ -59,7 +59,7 @@ console.log(user);
               <ul className="flex items-center gap-6 text-sm">
                 <li>
                   <div
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="text-white transition hover:text-red-500"
                     href="#"
                   >
                     {" "}
@@ -72,7 +72,7 @@ console.log(user);
 
                 <li>
                   <Link
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="text-white transition hover:text-red-500"
                     href="/carsComparator"
                   >
                     {" "}
@@ -82,7 +82,7 @@ console.log(user);
 
                 <li>
                   <div
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="text-white transition hover:text-red-500"
                     href="#"
                   >
                     Favoritos
@@ -91,7 +91,7 @@ console.log(user);
 
                 <li>
                   <div
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="text-white transition hover:text-red-500"
                     href="#"
                   >
                     {" "}
@@ -101,12 +101,12 @@ console.log(user);
                 {user && (
                   <li>
                     <div
-                      className="text-gray-500 transition hover:text-gray-500/75"
+                      className="text-white transition hover:text-red-500"
                       href="#"
                     >
                       {" "}
                       <LogoutLink>
-                        <LogOut color="#6b7280" />
+                        <LogOut size={18} color=" #ef4444" />
                       </LogoutLink>{" "}
                     </div>
                   </li>
@@ -118,7 +118,7 @@ console.log(user);
               <div className="sm:flex sm:gap-4">
                 {!isAuthenticated ? (
                   <LoginLink>
-                    <button className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-[#6b7280] ">
+                    <button className="flex items-center text-center py-1 px-4 min-h-[40px] justify-center max-w-fit text-white rounded font-normal text-sm leading-4 bg-red-500 ">
                       {" "}
                       Iniciar Sesión
                     </button>
@@ -135,7 +135,7 @@ console.log(user);
               </div>
 
               <div className="block md:hidden">
-                <MenuIcon onClick={handleMenuVisible} color="#6b7280" />
+                <MenuIcon onClick={handleMenuVisible} color="#ef4444" />
               </div>
             </div>
           </div>
