@@ -5,7 +5,7 @@ export const WikiCars = createContext(null);
 
 export default function WikiCarsProvider({ children }) {
   const [cars, setCars] = useState([]);
-  const [carInfo, setCarInfo] = useState({});
+  const [carInfo, setCarInfo] = useState(null);
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
   const [visibleMenuCondition, setVisibleMenuCondition] = useState(false);

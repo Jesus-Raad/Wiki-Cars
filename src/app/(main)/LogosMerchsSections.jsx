@@ -16,7 +16,7 @@ const LogosMerchsSections = () => {
     "/img/chevroletLogo.svg"
   ];
   return (
-    <div className="flex justify-center gap-3 my-3 md:gap-[20px] lg:gap-[30px] ">
+    <div className="flex justify-center py-4 gap-3 my-3 md:gap-[20px] lg:gap-[30px] ">
       {logo.map((merch,i )=>{
         return(
             <div key={i} className="w-[25px] sm:w-[40px] md:w-[55px]  lg:w-[70px] ">

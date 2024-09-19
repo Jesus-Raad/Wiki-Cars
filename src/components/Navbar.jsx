@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const { user, getUser } = useKindeBrowserClient();
   const alsoUser = getUser();
-console.log(user);
+
 
   const {
     visibleMenuCondition,
@@ -47,7 +47,7 @@ console.log(user);
   };
 
   return (
-    <nav className="bg-[#6b7280] fixed z-50 top-0 w-screen shadow-xl">
+    <nav className="bg-black fixed z-50 top-0 w-screen shadow-xl">
       <div className=" w-screen px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
@@ -59,13 +59,13 @@ console.log(user);
               <ul className="flex items-center gap-6 text-sm">
                 <li>
                   <div
-                    className="text-white transition hover:text-red-500"
-                    href="#"
+                    className="text-white transition cursor-pointer hover:text-red-500"
+                    
                   >
                     {" "}
                     <Search
                       onClick={handleSearchSectionVisible}
-                      color="#6b7280"
+                      color=" #ef4444"
                     />{" "}
                   </div>
                 </li>
@@ -79,6 +79,14 @@ console.log(user);
                     Comparador{" "}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className="text-white transition hover:text-red-500"
+                    href="/allCarsList"
+                  >
+                  Coches
+                  </Link>
+                </li>
 
                 <li>
                   <div
@@ -89,15 +97,7 @@ console.log(user);
                   </div>
                 </li>
 
-                <li>
-                  <div
-                    className="text-white transition hover:text-red-500"
-                    href="#"
-                  >
-                    {" "}
-                    Contacto{" "}
-                  </div>
-                </li>
+               
                 {user && (
                   <li>
                     <div

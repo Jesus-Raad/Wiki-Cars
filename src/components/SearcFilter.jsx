@@ -86,13 +86,13 @@ const SearcFilter = () => {
       filteredCars = cars.filter((car) => car.make_display === makerCar&&car.model_year === yearCar);
     }
      else if (yearCar&& modelCar) {
-      filteredCars = cars.filter((car) => car.model_year === yearCar&&car.model_name===modelCar);
+      filteredCars = cars.filter((car) => car.model_year === yearCar&&(car.model_name).toLowerCase()===modelCar.toLowerCase());
     }
      else if (makerCar&& modelCar) {
       filteredCars = cars.filter((car) => car.make_display === makerCar&&car.model_name===modelCar);
     }
      else if ( modelCar) {
-      filteredCars = cars.filter((car) => car.model_name===modelCar);
+      filteredCars = cars.filter((car) => (car.model_name).toLowerCase()===modelCar.toLowerCase());
     }
      else if (makerCar) {
       filteredCars = cars.filter((car) => car.make_display === makerCar);
@@ -168,7 +168,7 @@ console.log(finishFilter);
             ))}
           </datalist>
         </div>
-        <ButtonsCar style={"gray"} text={"Buscar"} />
+        <ButtonsCar link={"/allCarsList"} style={"gray"} text={"Buscar"} />
       </div>
     </form>
   );

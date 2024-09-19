@@ -2,6 +2,8 @@ import { WikiCars } from "@/context/wikiCarsContext";
 import { LoginLink, LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ArrowRightLeft, LogOut, Search, Star, User } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
 import React, { useContext } from "react";
 
 const MenuOptions = ({ action }) => {
@@ -18,8 +20,8 @@ const { visibleMenuCondition}=useContext(WikiCars)
       {user ? (
         <div className="flex flex-col  gap-3 pb-3">
           <div className="flex flex-col items-center">
-            <User color="#6b7280" />
-            <p className="text-[#374151]  text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+            <User color="#ef4444" />
+            <p className="text-[#ef4444]  text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
               {user.given_name} {user.family_name}
             </p>
             <p className="text-[#374151] max-w-[100px] overflow-scroll  overflow-x-hidden overflow-y-hidden text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
@@ -33,12 +35,14 @@ const { visibleMenuCondition}=useContext(WikiCars)
                 Favoritos
               </p>
             </div>
-            <div className="cursor-pointer flex w-fit gap-2">
-              <ArrowRightLeft size={15} strokeWidth={1.25} color="#6b7280" />{" "}
-              <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
-                Comparador
-              </p>
-            </div>
+            <Link href="/carsComparator">
+      <div className=" flex w-fit gap-2">
+        <ArrowRightLeft size={15} strokeWidth={1.25} color="#6b7280" />{" "}
+        <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
+          Comparador
+        </p>
+      </div>
+      </Link>
             <div onClick={action} className="cursor-pointer flex w-fit gap-2">
               <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
               <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
@@ -50,20 +54,21 @@ const { visibleMenuCondition}=useContext(WikiCars)
 
           <LogoutLink>
             <button className=" flex items-center w-full bg-[#374151]  text-white rounded max-w-[100px]  text-xs font-light leading-4  px-2 py-1">
-              <LogOut size={15} strokeWidth={1.25} color="#ffffff" />Cerrar Sesión
+              <LogOut size={15} strokeWidth={2} color="#ef4444" />Cerrar Sesión
             </button>
           </LogoutLink>
           </div>
         </div>
       ) : 
       <div className="flex flex-col gap-2 pl-2">
-      
-      <div className="cursor-pointer flex w-fit gap-2">
+      <Link href="/carsComparator">
+      <div className=" flex w-fit gap-2">
         <ArrowRightLeft size={15} strokeWidth={1.25} color="#6b7280" />{" "}
         <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
           Comparador
         </p>
       </div>
+      </Link>
       <div onClick={action} className=" cursor-pointer flex w-fit gap-2">
         <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
         <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">

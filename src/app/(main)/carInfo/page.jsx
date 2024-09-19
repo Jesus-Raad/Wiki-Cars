@@ -1,8 +1,9 @@
 import React from 'react'
+import CarDetail from './CarDetail'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div><CarDetail/></div>
   )
 }
 
