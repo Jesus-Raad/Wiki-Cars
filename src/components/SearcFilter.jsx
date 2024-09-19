@@ -1,7 +1,5 @@
 "use client";
 import { WikiCars } from "@/context/wikiCarsContext";
-import { Search } from "lucide-react";
-import { set } from "mongoose";
 import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ButtonsCar from "./ButtonsCar";
@@ -29,7 +27,7 @@ const SearcFilter = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   //////////////////////////////////////7
-  const { register, handleSubmit, watch } = useForm();
+  const { register, watch } = useForm();
 
   const makers = Array.from(new Set(cars.map((car) => car.make_display)));
   const years = Array.from(new Set(cars.map((car) => car.model_year)));
@@ -104,10 +102,7 @@ const SearcFilter = () => {
     setFinishFilter(filteredCars);
   }, [makerCar, yearCar,modelCar, cars]);
 
-  console.log(makerCar);
-  console.log(yearCar);
-  console.log(modelCar);
-console.log(finishFilter);
+ 
 
   return (
     <form
