@@ -1,10 +1,10 @@
 "use client";
 import ButtonsCar from "@/components/ButtonsCar";
 import { WikiCars } from "@/context/wikiCarsContext";
-import { Info } from "lucide-react";
+import { Info, Star } from "lucide-react";
 import { Kaushan_Script } from "next/font/google";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
@@ -19,35 +19,41 @@ const CarDetail = () => {
 
   const [comments, setComments] = useState(carInfo?.commit || []);
 
+;
+
+
   const { register, handleSubmit, reset } = useForm();
   const { user, getUser } = useKindeBrowserClient();
+  console.log(user);
+  
 
   const onSubmit = async (data) => {
-    if (!carInfo) return; // Asegúrate de que haya un coche seleccionado
-
+    if (!carInfo) return;
+  
     const commentData = {
       carId: carInfo.carId,
       comment: data.comment,
-      username: user?.given_name || "Anónimo", // Se obtiene el nombre del usuario autenticado en Kinde
+      username: user?.given_name || "Anónimo",
     };
-
+  
     try {
-      const response = await fetch("https://wiki-cars.vercel.app/api/topCars", {
+      const response = await fetch("/api/topCars", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(commentData),
       });
-
+  
+      const result = await response.json();
+  
       if (!response.ok) {
-        console.error("Error al agregar el comentario");
+        console.error(result.error);
         return;
       }
-
-      const newComment = await response.json(); // Suponiendo que la API devuelve el comentario guardado.
-      setComments((prevComments) => [...prevComments, newComment]);
-      console.log(carInfo);
-      
-      reset(); // Resetea el formulario
+  
+      // Agregar el nuevo comentario al estado
+      setComments((prevComments) => [...prevComments, result.comment]);
+  
+      reset(); // Limpiar el formulario
     } catch (error) {
       console.error("Error al enviar el comentario:", error);
     }
@@ -56,9 +62,9 @@ const CarDetail = () => {
   return (
     <>
       {carInfo ? (
-        <div className=" flex flex-col gap-6 md:flex-row items-center justify-center max-w-7xl mx-auto px-4 py-8 mt-16">
+        <div className=" flex flex-col gap-6 md:flex-row items-center justify-center h-fit max-w-7xl mx-auto px-4 py-8 mt-16">
           {/* Imagen del vehículo */}
-          <div className=" flex flex-col justify-center items-center w-fit h-64 mt-16 md:h-94 relative">
+          <div className=" flex flex-col justify-center items-center w-fit h-64 mt-16 relative md:h-94 md:static ">
             <Image
               src={`/img/${carInfo.model_name}${carInfo.model_year}.jpg`}
               alt={`${carInfo.model_make_display} ${carInfo.model_name}`}
@@ -69,14 +75,15 @@ const CarDetail = () => {
             />
             <div className="flex flex-col bg-[#32363A] justify-center h-full w-full rounded-2xl mx-5 items-center py-6 gap-6">
               <h2
-                className={`${kaushanScript.className} text-[#ef4444]  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
+                className={`${kaushanScript.className} flex gap-24 items-center text-[#ef4444]  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
               >
                 Comentarios
+                {user && <Star size={25} color="#ffffff" />}
               </h2>
               {comments.length > 0 ? (
-                <div>
+                <div className="flex flex-col w-full items-start">
                   {comments.map((c, index) => (
-                    <p className="flex" key={index}>
+                    <p className="flex pl-3" key={index}>
                          <Image
                     className="rounded-full"
                     width={28}
@@ -97,11 +104,11 @@ const CarDetail = () => {
                   type="text"
                   {...register("comment", { required: true })}
                   placeholder="Deja tu comentario"
-                  className="border p-2"
+                  className="border p-2 text-black rounded"
                 />
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2"
+                  className="bg-[#ef4444] rounded text-white px-4 py-2  hover:bg-[#ef4444]/75  hover:scale-105  hover:shadow-lg  transition-all duration-300"
                 >
                   Enviar comentario
                 </button>

@@ -50,14 +50,14 @@ export const POST = async (request) => {
     const objectId = new ObjectId(carId);
 
     // Comprobamos si existe el coche
-    const carExists = await db.collection("topCars").findOne({ _id: objectId });
+    const carExists = await db.collection("topCars").findOne({ carId: objectId });
     if (!carExists) {
       return NextResponse.json({ error: 'Coche no encontrado' }, { status: 404 });
     }
 
     // Actualizamos el coche con el nuevo comentario
     const updateResult = await db.collection("topCars").updateOne(
-      { _id: objectId }, // Buscamos el coche por su ID
+      { carId: objectId }, // Buscamos el coche por su ID
       { $push: { commit: { username, comment } } } // Agregamos el nuevo comentario
     );
 
@@ -70,6 +70,7 @@ export const POST = async (request) => {
     return NextResponse.json({ error: 'Error al agregar comentario' }, { status: 500 });
   }
 };
+
 
 
 // Manejar solicitudes OPTIONS para preflight CORS
