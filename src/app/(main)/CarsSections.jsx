@@ -20,7 +20,7 @@ const CarsSections = ({ acc }) => {
       >
         Show Cars{" "}
       </h2>
-      <div className="flex  flex-wrap justify-center max-w-[1111px] gap-3">
+      <div className="flex  flex-wrap justify-center max-w-[1111px] gap-3 max-h-[350px] overflow-scroll md:overflow-visible md:min-h-[700px]">
         {cars.slice(0, acc).map((car) => {
           return <Card generic={true} car={car} key={car._id} />;
         })}

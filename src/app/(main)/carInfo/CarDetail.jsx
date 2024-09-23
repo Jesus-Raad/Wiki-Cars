@@ -99,7 +99,7 @@ const CarDetail = () => {
               ) : (
                 <p>No hay comentarios aún.</p>
               )}
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit)} className="flex  justify-center items-center ">
                 <input
                   type="text"
                   {...register("comment", { required: true })}
@@ -110,7 +110,7 @@ const CarDetail = () => {
                   type="submit"
                   className="bg-[#ef4444] rounded text-white px-4 py-2  hover:bg-[#ef4444]/75  hover:scale-105  hover:shadow-lg  transition-all duration-300"
                 >
-                  Enviar comentario
+                  Enviar 
                 </button>
               </form>
             </div>
