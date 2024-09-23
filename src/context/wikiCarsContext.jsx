@@ -15,6 +15,7 @@ export default function WikiCarsProvider({ children }) {
   const [modelCar, setModelCar] = useState("");
   const [finishFilter, setFinishFilter] = useState([]);
   const [changeForS, setChangeForS] = useState(false);
+  const [visibleFavSectionCondition, setVisibleFavSectionCondition]=useState(false)
 
   useEffect(() => {
     const fetchCar = async () => {
@@ -58,7 +59,7 @@ export default function WikiCarsProvider({ children }) {
         finishFilter,
         setFinishFilter,
         changeForS,
-        setChangeForS,
+        setChangeForS,visibleFavSectionCondition, setVisibleFavSectionCondition
       }}
     >
       {children}

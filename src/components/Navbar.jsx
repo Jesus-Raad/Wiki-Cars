@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext } from "react";
 import Logo from "./Logo";
-import { LogOut, MenuIcon, Search } from "lucide-react";
+import { LogOut, MenuIcon, Search, X } from "lucide-react";
 import {
   LoginLink,
   LogoutLink,
@@ -20,18 +20,30 @@ const Navbar = () => {
   const { user, getUser } = useKindeBrowserClient();
   const alsoUser = getUser();
 
-
   const {
     visibleMenuCondition,
     setVisibleMenuCondition,
     IsSearchSection,
     setIsSearchSection,
+    visibleFavSectionCondition,
+    setVisibleFavSectionCondition,
   } = useContext(WikiCars);
 
+  const handleVisibleFavSectionCondition = () => {
+    if (visibleFavSectionCondition === true) {
+      setVisibleFavSectionCondition(false);
+    } else {
+      setVisibleFavSectionCondition(true);
+      setVisibleMenuCondition(false);
+      setIsSearchSection(false);
+    }
+  };
   const handleMenuVisible = () => {
     if (visibleMenuCondition === true) {
       setVisibleMenuCondition(false);
     } else {
+      setVisibleFavSectionCondition(false);
+
       setVisibleMenuCondition(true);
       setIsSearchSection(false);
     }
@@ -41,6 +53,8 @@ const Navbar = () => {
     if (IsSearchSection === true) {
       setIsSearchSection(false);
     } else {
+      setVisibleFavSectionCondition(false);
+
       setVisibleMenuCondition(false);
       setIsSearchSection(true);
     }
@@ -51,17 +65,27 @@ const Navbar = () => {
       <div className=" w-screen px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12">
-          <Link href={"/"}><Logo width={65} height={56} /></Link> 
+            <Link href={"/"}>
+              <Logo width={65} height={56} />
+            </Link>
           </div>
-
+          <div
+            className={
+              visibleFavSectionCondition
+                ? " flex flex-col absolute max-w-[314px] min-w-[200px] max-h-[391.37px] min-h-[270px] bg-[white]  gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]  md:right-[45%] md:top-[200px]  "
+                : " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white] invisible gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]"
+            }
+          >
+            <div className="flex justify-end">
+              <X onClick={handleVisibleFavSectionCondition} size={18} color=" #ef4444" />
+            </div>
+            <div></div>
+          </div>
           <div className="md:flex md:items-center md:gap-12">
-            <nav aria-label="Global" className="hidden md:block">
+            <div aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <div
-                    className="text-white transition cursor-pointer hover:text-red-500"
-                    
-                  >
+                  <div className="text-white transition cursor-pointer hover:text-red-500">
                     {" "}
                     <Search
                       onClick={handleSearchSectionVisible}
@@ -84,20 +108,19 @@ const Navbar = () => {
                     className="text-white transition hover:text-red-500"
                     href="/allCarsList"
                   >
-                  Coches
+                    Coches
                   </Link>
                 </li>
 
                 <li>
                   <div
                     className="text-white transition hover:text-red-500"
-                    href="#"
+                    onClick={handleVisibleFavSectionCondition}
                   >
                     Favoritos
                   </div>
                 </li>
 
-               
                 {user && (
                   <li>
                     <div
@@ -112,7 +135,7 @@ const Navbar = () => {
                   </li>
                 )}
               </ul>
-            </nav>
+            </div>
 
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">
@@ -143,7 +166,10 @@ const Navbar = () => {
       </div>
 
       <SearcFilter />
-      <MenuOptions action={handleSearchSectionVisible} />
+      <MenuOptions
+        actionSearch={handleSearchSectionVisible}
+        actionFav={handleVisibleFavSectionCondition}
+      />
     </nav>
   );
 };

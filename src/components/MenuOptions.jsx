@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import React, { useContext } from "react";
 
-const MenuOptions = ({ action }) => {
+const MenuOptions = ({ actionSearch,actionFav }) => {
   const { user, getUser } = useKindeBrowserClient();
 const { visibleMenuCondition}=useContext(WikiCars)
   return (
@@ -29,7 +29,7 @@ const { visibleMenuCondition}=useContext(WikiCars)
             </p>
           </div>
           <div className="flex flex-col gap-2 pl-2">
-            <div className="flex w-fit gap-2">
+            <div onClick={actionFav} className="flex w-fit gap-2">
               <Star size={15} strokeWidth={1.25} color="#6b7280" />
               <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
                 Favoritos
@@ -43,7 +43,7 @@ const { visibleMenuCondition}=useContext(WikiCars)
         </p>
       </div>
       </Link>
-            <div onClick={action} className="cursor-pointer flex w-fit gap-2">
+            <div onClick={actionSearch} className="cursor-pointer flex w-fit gap-2">
               <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
               <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
                 Buscar coche
@@ -69,7 +69,7 @@ const { visibleMenuCondition}=useContext(WikiCars)
         </p>
       </div>
       </Link>
-      <div onClick={action} className=" cursor-pointer flex w-fit gap-2">
+      <div onClick={actionSearch} className=" cursor-pointer flex w-fit gap-2">
         <Search size={15} strokeWidth={1.25} color="#6b7280" />{" "}
         <p className="text-[#374151] max-w-[100px]  text-xs font-normal leading-4 sm:text-sm sm:leading-4 md:text-base md:font-normal md:leading-4 lg:text-lg lg:font-normal lg:leading-5">
           Buscar coche

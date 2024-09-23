@@ -119,12 +119,12 @@ const SearcFilter = () => {
             id="marca"
             className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
           >
-            <option value=""  selected>
+            <option value="default"  selected>
               Fabricante
             </option>
             {makers.map((marca) => (
               <option key={marca} value={marca}>
-                {capitalize(marca)}
+                {marca&&capitalize(marca)}
               </option>
             ))}
           </select>
@@ -136,8 +136,8 @@ const SearcFilter = () => {
             id="year"
             className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
           >
-            <option value=""  selected>
-              Año 
+            <option value="default"  selected>
+            Año 
             </option>
             {years.map((year) => (
               <option key={year} value={year}>
