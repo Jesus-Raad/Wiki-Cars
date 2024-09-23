@@ -62,9 +62,16 @@ const CarDetail = () => {
   return (
     <>
       {carInfo ? (
-        <div className=" flex flex-col gap-6 md:flex-row items-center justify-center h-fit max-w-7xl mx-auto px-4 py-8 mt-16">
+        <div>
+ <h2
+                className={`${kaushanScript.className} flex justify-center gap-24 items-center text-black  text-2xl leading-7 font-medium mt-[90px] sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
+              >
+               {carInfo.model_name}   {carInfo.model_year}
+                
+              </h2>
+        <div className=" flex flex-col gap-6 md:flex-row items-center justify-center h-fit max-w-7xl mx-auto px-4 pb-8 ">
           {/* Imagen del vehículo */}
-          <div className=" flex flex-col justify-center items-center w-fit min-h-64 mt-16 gap-3 md:h-94 c ">
+          <div className=" flex flex-col justify-center items-center w-fit min-h-64  gap-3 md:h-94  ">
             <Image
               src={`/img/${carInfo.model_name}${carInfo.model_year}.jpg`}
               alt={`${carInfo.model_make_display} ${carInfo.model_name}`}
@@ -108,7 +115,7 @@ const CarDetail = () => {
                 />
                 <button
                   type="submit"
-                  className="bg-[#ef4444] rounded text-white px-4 py-2  hover:bg-[#ef4444]/75  hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                  className="bg-[#ef4444] rounded text-white px-4 py-2  hover:bg-[#ff4b4b]  hover:scale-105  hover:shadow-lg  transition-all duration-300"
                 >
                   Enviar 
                 </button>
@@ -245,12 +252,18 @@ const CarDetail = () => {
             </div>
           </div>
         </div>
+        </div>
       ) : (
         <div className="flex flex-col justify-center items-center text-black h-screen gap-3 mt-16 px-3 ">
           {" "}
           <p className=" flex flex-col items-center text-center pointer-events-none gap-2 text-xl text-gray-500 md:flex-row ">
             Por favor, selecciona un coche para ver los detalles. Haciendo click
-            en <Info color="#ef4444" />
+            en  <button
+                  
+                  className="flex  text-sm justify-center cursor-none items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                >
+                  Detalles
+                </button>
           </p>
           <ButtonsCar link={"/allCarsList"} style={"gray"} text={"Buscar"} />
         </div>

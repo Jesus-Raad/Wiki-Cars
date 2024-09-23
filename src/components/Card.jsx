@@ -86,6 +86,9 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
               height={120}
               width={206}
               objectFit="cover"
+              onError={(e) => {
+                e.target.src = `/img/${car.make_display.toLowerCase()}Logo.svg`; // Cambia a la ruta de tu imagen genérica
+              }}
             />
 
             <div className="pb-2 px-2  flex flex-col justify-start  text-[#32363A]">
@@ -115,13 +118,19 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
               </div>
               <div className=" flex justify-between items-center  z-10">
                 <div className="w-fit cursor-pointer">
-                  <Info onClick={hanldeInfoCar} color="#ef4444" />
+                  
+                  <button
+                  onClick={hanldeInfoCar}
+                  className="flex  text-sm justify-center items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                >
+                  Detalles
+                </button>
                 </div>
                 <button
                   onClick={changeForS ? handleFirstChoice : handleSecondChoice}
                   className="flex text-white text-sm justify-center items-center px-2 py-1 rounded-full  bg-black    hover:bg-[#32363A] hover:scale-105  hover:shadow-lg  transition-all duration-300"
                 >
-                  Comparate
+                  Comparar
                 </button>
               </div>
             </div>
@@ -132,7 +141,8 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
         <>
           {car === null ? (
             <div className="flex flex-col items-center  justify-center w-[200px] max-h-[500px]  sm:w-[250px] md:max-h-[400px] lg:h-[700px] lg:min-w-[400px] sticky top-16">
-              <div className="text-black  h-fit">seleccione un coche</div>
+
+              <p className="text-black  h-fit">seleccione un coche</p>
               <ButtonsCar
                 style={"gray"}
                 action={handleChangeBottom}
@@ -140,9 +150,9 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
               />
             </div>
           ) : (
-            <div className="flex  flex-col items-center justify-center  h-fit sticky top-[80px] ">
+            <div className="flex  flex-col items-center justify-center  h-fit sticky top-[80px] gap-5">
               {" "}
-              <article className="relative w-[170px] pt-[65px] max-h-[500px]  rounded-xl sm:w-[250px] md:max-h-[400px] md:pt-0 lg:h-[700px] lg:min-w-[400px] overflow-hidden transition-all duration-[3s] ease-[ease]   ">
+              <article className="relative w-[170px] pt-[65px] max-h-[500px]  rounded-xl sm:w-[250px] md:max-h-[400px] md:pt-0 lg:h-[700px] lg:min-w-[400px]  transition-all duration-[3s] ease-[ease]   ">
                 <style jsx>{`
                   article::before {
                     content: "";
@@ -164,13 +174,16 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
                     opacity: 1;
                   }
                 `}</style>
-                <div className="h-full ">
+                <div className="h-full overflow-hidden min-h-[210px]">
                   <Image
                     className=" shadow-[0_60px_60px_-60px_rgba(0,30,255,0.5)] rounded-xl object-cover bottom-0 w-full h-full"
                     width={768}
                     height={768}
                     src={`/img/${car.model_name}${car.model_year}vertical.jpg`}
                     alt={"verticalCar"}
+                    onError={(e) => {
+                      e.target.src = `/img/${car.make_display.toLowerCase()}Logo.svg`; // Cambia a la ruta de tu imagen genérica
+                    }}
                   />
                   <Image
                     className="absolute w-[200px] rounded-xl md:min-h-[280px] lg:min-w-[280px] bottom-0 left-0 right-0 m-auto translate-y-1/4 transition-[3s] duration-[ease] opacity-0 hover:opacity-100 hover:translate-y-[10%] mb-3"
@@ -178,6 +191,9 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
                     height={768}
                     src={`/img/${car.model_name}${car.model_year}png.png`}
                     alt={"verticalCar"}
+                    onError={(e) => {
+                      e.target.src = `/img/CarGenericpng.png`; // Cambia a la ruta de tu imagen genérica
+                    }}
                   />
                 </div>
               </article>
@@ -185,10 +201,15 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
                 className={changeSide ? "w-full" : " flex w-full justify-end"}
               >
                 <div className=" w-fit cursor-pointer">
-                  <Info poin onClick={hanldeInfoCar} color="#ef4444" />
+                <button
+                  onClick={hanldeInfoCar}
+                  className="flex  text-sm justify-center items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                >
+                  Detalles
+                </button>
                 </div>
               </div>
-              <div className="flex flex-col items-center gap-2  w-[70px] md:w-28  bg-white rounded-full px-2 absolute bottom-0 mb-20 ">
+              <div className="flex flex-col items-center gap-2  w-[70px] md:w-28  bg-white rounded-full px-2 absolute bottom-0 mb-32 ">
                 <Image
                   width={80}
                   height={50}

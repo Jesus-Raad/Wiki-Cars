@@ -12,14 +12,14 @@ function AnimateSection() {
     useContext(WikiCars);
   return (
     <>
-      <div className={firstChoice&&secondChoice?"flex  flex-col items-center   ":"flex  flex-col items-center  justify-center mt-16 h-screen"}>
-        <div className="flex  ">
+      <div className={firstChoice&&secondChoice?"flex  flex-col items-center mt-[90px]  ":"flex  flex-col items-center  justify-center mt-16 h-screen"}>
+        <div className="flex gap-4 ">
 
           <Card animationComp={true} changeSide={true} car={firstChoice}  />{" "}
-          <StatasSection />
+          
           <Card animationComp={true} car={secondChoice} />
         </div>
-        <StatasSection mobileVew={true}/>
+        <StatasSection />
       </div>
     </>
   );
