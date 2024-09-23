@@ -119,7 +119,7 @@ const SearcFilter = () => {
             id="marca"
             className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
           >
-            <option value="default"  selected>
+            <option value=""  selected>
               Fabricante
             </option>
             {makers.map((marca) => (
@@ -136,7 +136,7 @@ const SearcFilter = () => {
             id="year"
             className="bg-gray-200 text-gray-700 p-2 rounded-md outline-none focus:ring focus:ring-gray-300 max-w-32 sm:w-auto"
           >
-            <option value="default"  selected>
+            <option value=""  selected>
             Año 
             </option>
             {years.map((year) => (

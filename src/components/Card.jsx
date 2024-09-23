@@ -19,6 +19,8 @@ const Card = ({ animationComp, generic, car, changeSide }) => {
     setChangeForS,
   } = useContext(WikiCars);
 
+  
+
   const handleFirstChoice = () => {
     setFirstChoice(car);
     router.push("/carsComparator");

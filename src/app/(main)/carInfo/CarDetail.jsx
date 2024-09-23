@@ -64,7 +64,7 @@ const CarDetail = () => {
       {carInfo ? (
         <div className=" flex flex-col gap-6 md:flex-row items-center justify-center h-fit max-w-7xl mx-auto px-4 py-8 mt-16">
           {/* Imagen del vehículo */}
-          <div className=" flex flex-col justify-center items-center w-fit min-h-64 mt-16  md:h-94 c ">
+          <div className=" flex flex-col justify-center items-center w-fit min-h-64 mt-16 gap-3 md:h-94 c ">
             <Image
               src={`/img/${carInfo.model_name}${carInfo.model_year}.jpg`}
               alt={`${carInfo.model_make_display} ${carInfo.model_name}`}
@@ -97,7 +97,7 @@ const CarDetail = () => {
                   ))}
                 </div>
               ) : (
-                <p>No hay comentarios aún.</p>
+                <p className="text-[#ef4444]">No hay comentarios aún.</p>
               )}
               <form onSubmit={handleSubmit(onSubmit)} className="flex  justify-center items-center ">
                 <input
