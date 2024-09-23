@@ -64,7 +64,7 @@ const CarDetail = () => {
       {carInfo ? (
         <div className=" flex flex-col gap-6 md:flex-row items-center justify-center h-fit max-w-7xl mx-auto px-4 py-8 mt-16">
           {/* Imagen del vehículo */}
-          <div className=" flex flex-col justify-center items-center w-fit h-64 mt-16 relative md:h-94 md:static ">
+          <div className=" flex flex-col justify-center items-center w-fit min-h-64 mt-16  md:h-94 c ">
             <Image
               src={`/img/${carInfo.model_name}${carInfo.model_year}.jpg`}
               alt={`${carInfo.model_make_display} ${carInfo.model_name}`}
@@ -81,9 +81,9 @@ const CarDetail = () => {
                 {user && <Star size={25} color="#ffffff" />}
               </h2>
               {comments.length > 0 ? (
-                <div className="flex flex-col w-full items-start">
+                <div className="flex flex-col w-full items-start ">
                   {comments.map((c, index) => (
-                    <p className="flex pl-3" key={index}>
+                    <p className="flex pl-3 justify-center gap-4" key={index}>
                          <Image
                     className="rounded-full"
                     width={28}
