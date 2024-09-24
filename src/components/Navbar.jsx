@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "./Logo";
 import { LogOut, MenuIcon, Search, X } from "lucide-react";
 import {
@@ -13,6 +13,7 @@ import { WikiCars } from "@/context/wikiCarsContext";
 import MenuOptions from "./MenuOptions";
 import SearcFilter from "./SearcFilter";
 import Link from "next/link";
+import Card from "./Card";
 
 const Navbar = () => {
   const { isAuthenticated } = useKindeBrowserClient();
@@ -26,7 +27,7 @@ const Navbar = () => {
     IsSearchSection,
     setIsSearchSection,
     visibleFavSectionCondition,
-    setVisibleFavSectionCondition,
+    setVisibleFavSectionCondition, 
   } = useContext(WikiCars);
 
   const handleVisibleFavSectionCondition = () => {
@@ -60,6 +61,39 @@ const Navbar = () => {
     }
   };
 
+  const [favorites, setFavorites] = useState([]);
+
+  const fetchFavorites = async () => {
+    if (!user?.id) return; // Asegúrate de que el usuario esté autenticado
+
+    try {
+      const response = await fetch('/api/users/favorites', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'userId': user.id, // Pasamos el ID del usuario en los headers
+        },
+      });
+
+      if (!response.ok) throw new Error('Error al obtener favoritos');
+      
+      const data = await response.json();
+      setFavorites(data.favorites); // Guardamos la lista de IDs de coches favoritos
+    } catch (error) {
+      console.error('Error al obtener favoritos:', error);
+    }
+  };
+
+  // Fetch favoritos cuando el modal se abre
+  useEffect(() => {
+    if (visibleFavSectionCondition) {
+      fetchFavorites();
+    }
+  }, [visibleFavSectionCondition]);
+
+
+
+
   return (
     <nav className="bg-black fixed z-50 top-0 w-screen shadow-xl">
       <div className=" w-screen px-4 sm:px-6 lg:px-8">
@@ -79,7 +113,17 @@ const Navbar = () => {
             <div className="flex justify-end">
               <X onClick={handleVisibleFavSectionCondition} size={18} color=" #ef4444" />
             </div>
-            <div></div>
+            <div>
+     {/* aqui quiero hacer un map de los coches favoritos del usuario y que rendericen la <card cardFav={true}> */}
+   {/* Mapeamos los favoritos y renderizamos las mini tarjetas */}
+   {favorites.length > 0 ? (
+            favorites.map((carId) => (
+              <Card key={carId} car={carId} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
+            ))
+          ) : (
+            <p>No tienes coches favoritos aún.</p>
+          )}
+            </div>
           </div>
           <div className="md:flex md:items-center md:gap-12">
             <div aria-label="Global" className="hidden md:block">
@@ -113,6 +157,7 @@ const Navbar = () => {
                 </li>
 
                 <li>
+                  {/* seccion de favoritos */}
                   <div
                     className="text-white transition hover:text-red-500"
                     onClick={handleVisibleFavSectionCondition}

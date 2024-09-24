@@ -1,5 +1,6 @@
 "use client";
 import { WikiCars } from "@/context/wikiCarsContext";
+import { Equal, MoveDown, MoveUp } from "lucide-react";
 import React, { useContext } from "react";
 
 const StatasSection = ({ mobileVew }) => {
@@ -13,7 +14,9 @@ const StatasSection = ({ mobileVew }) => {
   } = useContext(WikiCars);
 
   const calcularAceleracion = (peso, potencia) => {
-    if (!peso || !potencia) return "N/D";
+    if (!peso || !potencia) {
+      return( "---")
+    }
     const aceleracion = peso / potencia;
     return aceleracion.toFixed(2);
   };
@@ -38,10 +41,10 @@ const StatasSection = ({ mobileVew }) => {
             </h1>
             <div className="flex  w-full justify-evenly">
               <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {firstChoice.model_year ? firstChoice.model_year : "N/D"}
+                {firstChoice.model_year ? firstChoice.model_year : "---"}
               </p>
               <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
-                {secondChoice.model_year ? secondChoice.model_year : "N/D"}
+                {secondChoice.model_year ? secondChoice.model_year : "---"}
               </p>
             </div>
           </div>
@@ -53,12 +56,12 @@ const StatasSection = ({ mobileVew }) => {
               <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_engine_fuel
                   ? firstChoice.model_engine_fuel
-                  : "N/D"}
+                  : "---"}
               </p>
               <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {secondChoice.model_engine_fuel
                   ? secondChoice.model_engine_fuel
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
@@ -70,12 +73,12 @@ const StatasSection = ({ mobileVew }) => {
               <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_transmission_type
                   ? firstChoice.model_transmission_type
-                  : "N/D"}
+                  : "---"}
               </p>
               <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {secondChoice.model_transmission_type
                   ? secondChoice.model_transmission_type
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
@@ -84,80 +87,163 @@ const StatasSection = ({ mobileVew }) => {
               Ancho{" "}
             </h1>
             <div className="flex  w-full justify-evenly">
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_width_mm
                   ? `${firstChoice.model_width_mm} mm`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_width_mm > secondChoice.model_width_mm ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_width_mm ===
+                  secondChoice.model_width_mm ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_width_mm < secondChoice.model_width_mm ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_width_mm ===
+                  secondChoice.model_width_mm ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_width_mm
                   ? `${secondChoice.model_width_mm} mm`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-4 items-center">
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
+            <h1 className="flex text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
               Longitud{" "}
             </h1>
             <div className="flex  w-full justify-evenly">
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className=" flex text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_length_mm
                   ? `${firstChoice.model_length_mm} mm`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_length_mm > secondChoice.model_length_mm ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_length_mm ===
+                  secondChoice.model_length_mm ? (
+                  <Equal color="#dba50f" />
+                ) : firstChoice.model_length_mm ===
+                  secondChoice.model_length_mm ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_length_mm < secondChoice.model_length_mm ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_length_mm ===
+                  secondChoice.model_length_mm ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_length_mm
                   ? `${secondChoice.model_length_mm} mm`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-4 items-center">
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
+            <h1 className="flex text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
               Peso{" "}
             </h1>
             <div className="flex  w-full justify-evenly">
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_weight_kg
                   ? `${firstChoice.model_weight_kg} Kg`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_weight_kg > secondChoice.model_weight_kg ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_weight_kg ===
+                  secondChoice.model_weight_kg ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_weight_kg < secondChoice.model_weight_kg ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_weight_kg ===
+                  secondChoice.model_weight_kg ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_weight_kg
                   ? `${secondChoice.model_weight_kg} Kg`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-4 items-center">
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
+            <h1 className="flex text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
               Potencia
             </h1>
             <div className="flex  w-full justify-evenly">
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_engine_power_ps
                   ? `${firstChoice.model_engine_power_ps} PS`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_engine_power_ps >
+                secondChoice.model_engine_power_ps ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_engine_power_ps ===
+                  secondChoice.model_engine_power_ps ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_engine_power_ps <
+                secondChoice.model_engine_power_ps ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_engine_power_ps ===
+                  secondChoice.model_engine_power_ps ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_engine_power_ps
                   ? `${secondChoice.model_engine_power_ps} PS`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-4 items-center">
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
+            <h1 className="flex text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
               Aceleracion
             </h1>
             <div className="flex  w-full justify-evenly">
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_weight_kg &&
                   firstChoice.model_engine_power_ps &&
                   aceleracion1}
+                {aceleracion1 > aceleracion2 ? (
+                  <MoveUp color="#2b9c41" />
+                ) : aceleracion1 === aceleracion2 ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {aceleracion1 < aceleracion2 ? (
+                  <MoveUp color="#2b9c41" />
+                ) : aceleracion1 === aceleracion2 ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_weight_kg &&
                   secondChoice.model_engine_power_ps &&
                   aceleracion2}
@@ -165,37 +251,73 @@ const StatasSection = ({ mobileVew }) => {
             </div>
           </div>
           <div className="flex flex-col w-full gap-4 items-center">
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
+            <h1 className="flex text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
               Velocidad Maxima
             </h1>
             <div className="flex  w-full justify-evenly">
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_top_speed_kph
                   ? `${firstChoice.model_top_speed_kph} KPH`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_top_speed_kph >
+                secondChoice.model_top_speed_kph ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_top_speed_kph ===
+                  secondChoice.model_top_speed_kph ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_top_speed_kph <
+                secondChoice.model_top_speed_kph ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_top_speed_kph ===
+                  secondChoice.model_top_speed_kph ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_top_speed_kph
                   ? `${secondChoice.model_top_speed_kph} KPH`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
           <div className="flex flex-col w-full gap-4 items-center">
-            <h1 className="text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
+            <h1 className="flex text-[#374151] text-lg font-bold leading-4 sm:text-xl sm:leading-4 md:text-2xl md:font-bold md:leading-4  lg:font-bold lg:leading-5">
               0-100 kph(s)
             </h1>
             <div className="flex  w-full justify-evenly">
               {" "}
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_0_to_100_kph
                   ? `${firstChoice.model_0_to_100_kph} s`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_0_to_100_kph >
+                secondChoice.model_0_to_100_kph ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_0_to_100_kph ===
+                  secondChoice.model_0_to_100_kph ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_0_to_100_kph <
+                secondChoice.model_0_to_100_kph ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_0_to_100_kph ===
+                  secondChoice.model_0_to_100_kph ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_0_to_100_kph
                   ? `${secondChoice.model_0_to_100_kph} s`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>
@@ -205,15 +327,33 @@ const StatasSection = ({ mobileVew }) => {
             </h1>
             <div className="flex  w-full justify-evenly">
               {" "}
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
                 {firstChoice.model_fuel_cap_l
                   ? `${firstChoice.model_fuel_cap_l} L`
-                  : "N/D"}
+                  : "---"}
+                {firstChoice.model_fuel_cap_l >
+                secondChoice.model_fuel_cap_l ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_fuel_cap_l ===
+                  secondChoice.model_fuel_cap_l ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}
               </p>
-              <p className="text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+              <p className="flex items-center text-[#374151] text-sm font-normal leading-4 sm:text-base sm:leading-4 md:text-lg md:font-normal md:leading-4 lg:text-xl lg:font-normal lg:leading-5">
+                {firstChoice.model_fuel_cap_l <
+                secondChoice.model_fuel_cap_l ? (
+                  <MoveUp color="#2b9c41" />
+                ) : firstChoice.model_fuel_cap_l ===
+                  secondChoice.model_fuel_cap_l ? (
+                  <Equal color="#dba50f" />
+                ) : (
+                  <MoveDown color="#ef4444" />
+                )}{" "}
                 {secondChoice.model_fuel_cap_l
                   ? `${secondChoice.model_fuel_cap_l} L`
-                  : "N/D"}
+                  : "---"}
               </p>
             </div>
           </div>{" "}

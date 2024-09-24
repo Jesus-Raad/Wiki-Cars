@@ -64,7 +64,7 @@ const CarDetail = () => {
       {carInfo ? (
         <div>
  <h2
-                className={`${kaushanScript.className} flex justify-center gap-24 items-center text-black  text-2xl leading-7 font-medium mt-[90px] sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
+                className={`${kaushanScript.className} flex justify-center gap-24 items-center text-black  text-2xl leading-7 font-medium mt-[90px] pb-3 sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
               >
                {carInfo.model_name}   {carInfo.model_year}
                 
