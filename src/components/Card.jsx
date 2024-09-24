@@ -72,12 +72,20 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
 
   const handleFavorite = async () => {
     try {
-      const res = await fetch('https://wiki-cars.vercel.app/api/users', {
+      // Asegúrate de que el ID de usuario esté disponible.
+      const userId = user || alsoUser;
+  
+      if (!userId) {
+        console.error("User ID no disponible");
+        return;
+      }
+  
+      const res = await fetch('/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, carId: car.id }),
+        body: JSON.stringify({ userId, carId: car }),
       });
-
+  
       if (res.ok) {
         setIsFavorite(!isFavorite);
       } else {
@@ -87,6 +95,7 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
       console.error('Error al manejar favorito:', error);
     }
   };
+
 
 
 

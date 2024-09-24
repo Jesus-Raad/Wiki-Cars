@@ -1,38 +1,55 @@
 import { NextResponse } from 'next/server';
-import { connectToDatabase } from '../../../../lib/mongodb'; // Conexión con MongoDB
+import { ObjectId } from 'mongodb';
+import clientPromise from '../../../../lib/mongodb.mjs';
 
-export async function POST(req) {
-  const { userId, carId } = await req.json();
+
+
+export const GET = async (request) => {
+    try {
+      const client = await clientPromise;
+      const db = client.db("wikiCars");
+      
+      const userId = request.headers.get("userId"); // Obtenemos el userId desde los headers
   
+      // Comprobamos si el usuario existe
+      const user = await db.collection("users").findOne({ userId });
+  
+      if (!user || !user.favorites) {
+        return NextResponse.json({ favorites: [] }); // Si no hay usuario o no tiene favoritos, devolvemos un array vacío
+      }
+  
+      return NextResponse.json({ favorites: user.favorites });
+    } catch (e) {
+      return NextResponse.json({ error: 'Error al obtener favoritos' }, { status: 500 });
+    }
+  };
+
+export const POST = async (request) => {
   try {
-    const { db } = await connectToDatabase();
-    const user = await db.collection('users').findOne({ userId });
+    const client = await clientPromise;
+    const db = client.db("wikiCars");
+    const body = await request.json();
+    const { userId, carId } = body;
+
+    // Comprobamos si el usuario ya existe
+    const user = await db.collection("users").findOne({ userId });
 
     if (user) {
-      // Si el coche ya está en favoritos, lo eliminamos. Si no está, lo añadimos.
-      const isFavorite = user.favorites.includes(carId);
-      const update = isFavorite
-        ? { $pull: { favorites: carId } }
-        : { $push: { favorites: carId } };
-
-      await db.collection('users').updateOne({ userId }, update);
+      // Actualizamos los favoritos del usuario
+      await db.collection("users").updateOne(
+        { userId },
+        { $addToSet: { favorites: carId } } // $addToSet evita duplicados
+      );
     } else {
-      // Si el usuario no existe, lo creamos con el coche en favoritos.
-      await db.collection('users').insertOne({ userId, favorites: [carId] });
+      // Si no existe el usuario, lo creamos
+      await db.collection("users").insertOne({
+        userId,
+        favorites: [carId]
+      });
     }
 
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ success: false, error });
+    return NextResponse.json({ message: 'Favorito agregado' });
+  } catch (e) {
+    return NextResponse.json({ error: 'Error al agregar favorito' }, { status: 500 });
   }
-}
-
-export function OPTIONS() {
-  return NextResponse.json(null, {
-    headers: {
-      'Access-Control-Allow-Origin': '*', // Permitir CORS
-      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
-}
+};

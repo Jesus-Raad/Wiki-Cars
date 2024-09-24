@@ -66,12 +66,11 @@ const Navbar = () => {
  useEffect(() => {
   const fetchFavorites = async () => {
     try {
-      const response = await fetch('https://wiki-cars.vercel.app/api/users', {
+      const response = await fetch('/api/users', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           // Si necesitas autenticación, envía el token de usuario
-          Authorization: `Bearer ${token}`, // Reemplaza "token" con el token que obtuviste de Kinde
         },
       });
 
