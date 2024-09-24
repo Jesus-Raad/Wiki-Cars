@@ -68,36 +68,25 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
   const alsoUser = getUser();
 
 
-  
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleFavorite = async (carId) => {
-    const userId = user?.id; // Obtén el ID del usuario desde Kinde
-  
-    if (!userId) return; // Verifica que el usuario esté autenticado
-  
+  const handleFavorite = async () => {
     try {
-      const response = await fetch('/api/users/favorites', {
+      const res = await fetch('https://wiki-cars.vercel.app/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, carId }),
+        body: JSON.stringify({ userId, carId: car.id }),
       });
-  
-      if (!response.ok) {
-        console.error('Error al agregar favorito');
+
+      if (res.ok) {
+        setIsFavorite(!isFavorite);
+      } else {
+        console.error('Error al manejar favorito');
       }
-  
-      // Actualiza el estado para reflejar los cambios en la UI si es necesario.
     } catch (error) {
       console.error('Error al manejar favorito:', error);
     }
   };
-
-
-
-
-
-
-
 
 
 
@@ -129,11 +118,11 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">{car.model_name}</h3>{" "}
                 {user && (
-                  <Star
-                  className="cursor-pointer"
+                    <Star
+                    className="cursor-pointer"
                     size={17}
-                    color={ "#FFFFFF"} 
-                    onClick={handleFavorite}
+                    color={isFavorite ? "#FF0000" : "#FFFFFF"} // Rojo si es favorito, blanco si no
+                    onClick={() => handleFavorite(car.id)}
                   />
                 )}
               </div>

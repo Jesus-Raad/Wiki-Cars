@@ -63,33 +63,31 @@ const Navbar = () => {
 
   const [favorites, setFavorites] = useState([]);
 
+ useEffect(() => {
   const fetchFavorites = async () => {
-    if (!user?.id) return; // Asegúrate de que el usuario esté autenticado
-
     try {
-      const response = await fetch('/api/users/favorites', {
+      const response = await fetch('https://wiki-cars.vercel.app/api/users', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'userId': user.id, // Pasamos el ID del usuario en los headers
+          // Si necesitas autenticación, envía el token de usuario
+          Authorization: `Bearer ${token}`, // Reemplaza "token" con el token que obtuviste de Kinde
         },
       });
 
-      if (!response.ok) throw new Error('Error al obtener favoritos');
-      
+      if (!response.ok) {
+        throw new Error('Error al obtener los favoritos');
+      }
+
       const data = await response.json();
-      setFavorites(data.favorites); // Guardamos la lista de IDs de coches favoritos
+      setFavorites(data.favorites); // Asegúrate de tener un estado de 'favorites'
     } catch (error) {
-      console.error('Error al obtener favoritos:', error);
+      console.error('Error al hacer el fetch de favoritos:', error);
     }
   };
 
-  // Fetch favoritos cuando el modal se abre
-  useEffect(() => {
-    if (visibleFavSectionCondition) {
-      fetchFavorites();
-    }
-  }, [visibleFavSectionCondition]);
+  fetchFavorites();
+}, []);
 
 
 
@@ -121,7 +119,7 @@ const Navbar = () => {
               <Card key={carId} car={carId} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
             ))
           ) : (
-            <p>No tienes coches favoritos aún.</p>
+            <p className="text-black">No tienes coches favoritos aún.</p>
           )}
             </div>
           </div>
