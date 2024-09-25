@@ -17,7 +17,9 @@ export default function WikiCarsProvider({ children }) {
   const [changeForS, setChangeForS] = useState(false);
   const [visibleFavSectionCondition, setVisibleFavSectionCondition] =
     useState(false);
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [favorite, setFavorite] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   useEffect(() => {
     const fetchCar = async () => {
       try {
@@ -25,7 +27,7 @@ export default function WikiCarsProvider({ children }) {
           `https://wiki-cars.vercel.app/api/topCars`
         );
         const data = await response.json();
-        console.log(data);
+        
 
         setCars(data); // Asegúrate de guardar los datos correctamente
       } catch (error) {
@@ -63,8 +65,8 @@ export default function WikiCarsProvider({ children }) {
         setChangeForS,
         visibleFavSectionCondition,
         setVisibleFavSectionCondition,
-        // isFavorite,
-        // setIsFavorite,
+        favorite,
+        setFavorite,isFavorite, setIsFavorite
       }}
     >
       {children}

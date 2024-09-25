@@ -14,6 +14,13 @@ import MenuOptions from "./MenuOptions";
 import SearcFilter from "./SearcFilter";
 import Link from "next/link";
 import Card from "./Card";
+import { Kaushan_Script } from "next/font/google";
+
+const kaushanScript = Kaushan_Script({
+  weight: "400", // Puedes especificar el peso si es necesario
+  subsets: ["latin"], // Puedes elegir los subsets de la fuente, en este caso 'latin'
+  display: "swap", // Mejora la experiencia de carga
+});
 
 const Navbar = () => {
   const { isAuthenticated } = useKindeBrowserClient();
@@ -27,7 +34,11 @@ const Navbar = () => {
     IsSearchSection,
     setIsSearchSection,
     visibleFavSectionCondition,
-    setVisibleFavSectionCondition, 
+    setVisibleFavSectionCondition,
+    favorite,
+    setFavorite,
+    isFavorite,
+    setIsFavorite,
   } = useContext(WikiCars);
 
   const handleVisibleFavSectionCondition = () => {
@@ -61,34 +72,27 @@ const Navbar = () => {
     }
   };
 
-  const [userFavorites, setUserFavorites] = useState([]);
-
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(
-          `https://wiki-cars.vercel.app/api/users`
-        );
-        const data = await response.json();
-        
-        // Filtramos el usuario autenticado
-        const currentUser = data.find((user) => user.userId.id === alsoUser.id);
-        if (currentUser && currentUser.favorites) {
-          setUserFavorites(currentUser.favorites); // Establecemos los favoritos del usuario autenticado
-        }
-      } catch (error) {
-        console.error("Error fetching car data:", error);
-      }
+    const fetchFavorites = async () => {
+      const userId = alsoUser.id; // El userId que obtuviste tras el login
+
+      const response = await fetch("/api/users", {
+        method: "GET",
+        headers: {
+          userId: userId, // Asegúrate de enviar el userId aquí
+        },
+      });
+
+      const data = await response.json();
+      
+      setFavorite(data.favorites);
     };
 
     if (alsoUser?.id) {
-      fetchUsers();
+      fetchFavorites();
     }
-  }, [alsoUser]);
-
-
-console.log(userFavorites);
-
+  }, [alsoUser, isFavorite]);
+ 
 
   return (
     <nav className="bg-black fixed z-50 top-0 w-screen shadow-xl">
@@ -102,23 +106,32 @@ console.log(userFavorites);
           <div
             className={
               visibleFavSectionCondition
-                ? " flex flex-col absolute max-w-[314px] min-w-[200px] max-h-[391.37px] min-h-[270px] bg-[white]  gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]  md:right-[45%] md:top-[200px]  "
+                ? " flex flex-col absolute max-w-[314px] min-w-[200px] md:min-w-[300px] max-h-[391.37px] min-h-[270px] overflow-scroll  bg-[white]  gap-5 p-2 rounded-lg border-red-500 border-[3px]  shadow-2xl shadow-black  right-5 top-16    "
                 : " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white] invisible gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]"
             }
           >
-            <div className="flex justify-end">
-              <X onClick={handleVisibleFavSectionCondition} size={18} color=" #ef4444" />
+            <div className="flex justify-between items-center">
+            <h2
+        className={` ${kaushanScript.className} text-black  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
+      >
+        Fav Cars{" "}
+      </h2>
+       <X
+                onClick={handleVisibleFavSectionCondition}
+                size={18}
+                color=" #ef4444"
+              />
             </div>
-            <div>
-     {/* aqui quiero hacer un map de los coches favoritos del usuario y que rendericen la <card cardFav={true}> */}
-   {/* Mapeamos los favoritos y renderizamos las mini tarjetas */}
-   {userFavorites.length > 0 ? (
-            userFavorites.map((carId) => (
-              <Card key={carId} car={carId} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
-            ))
-          ) : (
-            <p className="text-black">No tienes coches favoritos aún.</p>
-          )}
+            <div className="flex flex-col gap-2 ">
+              {/* aqui quiero hacer un map de los coches favoritos del usuario y que rendericen la <card cardFav={true}> */}
+              {/* Mapeamos los favoritos y renderizamos las mini tarjetas */}
+              {favorite.length > 0 ? (
+                favorite.map((car) => (
+                  <Card key={car} car={car} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
+                ))
+              ) : (
+                <p className="text-black">No tienes coches favoritos aún.</p>
+              )}
             </div>
           </div>
           <div className="md:flex md:items-center md:gap-12">

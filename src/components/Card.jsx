@@ -7,7 +7,7 @@ import { Info, Star } from "lucide-react";
 import { WikiCars } from "@/context/wikiCarsContext";
 import { useRouter } from "next/navigation";
 
-const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
+const Card = ({ animationComp, generic, car, changeSide, cardFav,isCarFavorite }) => {
   const {
     carInfo,
     setCarInfo,
@@ -16,8 +16,7 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
     secondChoice,
     setSecondChoice,
     changeForS,
-    setChangeForS,
-  
+  favorite,isFavorite, setIsFavorite
   } = useContext(WikiCars);
 
   
@@ -68,8 +67,6 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
   const alsoUser = getUser();
 
 
-  const [isFavorite, setIsFavorite] = useState(false);
-
   const handleFavorite = async () => {
     try {
       // Asegúrate de que el ID de usuario esté disponible.
@@ -86,7 +83,10 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
         body: JSON.stringify({ userId, carId: car }),
       });
   
+
+      
       if (res.ok) {
+        
         setIsFavorite(!isFavorite);
       } else {
         console.error('Error al manejar favorito');
@@ -97,6 +97,8 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
   };
 
 
+
+console.log(`${car.model_name} ${isCarFavorite}`);
 
 
   return (
@@ -127,13 +129,13 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-bold">{car.model_name}</h3>{" "}
                 {user && (
-                    <Star
-                    className="cursor-pointer"
-                    size={17}
-                    color={isFavorite ? "#FF0000" : "#FFFFFF"} // Rojo si es favorito, blanco si no
-                    onClick={() => handleFavorite(car.id)}
-                  />
-                )}
+        <Star
+          className="cursor-pointer"
+          size={17}
+          color={isCarFavorite===false? "#FFFFFF" :"#FF0000"  } // Rojo si es favorito, blanco si no
+          onClick={handleFavorite}
+        />
+      )}
               </div>
               <p className="text-sm text-white">{car.model_make_display}</p>
               <div className="mt-4 text-white">
@@ -270,7 +272,9 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
         </>
       )}
        {cardFav && (
-  <div className="flex text-black">
+  <div className="flex justify-between rounded-lg bg-red-300  p-1 shadow-md text-black">
+    <div className="rounded-full bg-white">
+
     <Image
       width={40}
       height={40}
@@ -280,6 +284,7 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
         e.target.src = `/img/CarGenericpng.png`; // Imagen genérica si no encuentra la específica
       }}
     />
+    </div>
     <p>
       {car.model_name} ({car.model_year})
     </p>

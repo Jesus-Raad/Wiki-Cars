@@ -9,10 +9,17 @@ const kaushanScript = Kaushan_Script({
   display: "swap", // Mejora la experiencia de carga
 });
 const CarsSections = ({ acc }) => {
-  const { cars } = useContext(WikiCars);
+  const { cars,favorite } = useContext(WikiCars);
+
+  const favoriteCarIds = favorite.map(car => car.carId);
 
 
-
+  const isCarFavorite=(element) =>{ return favoriteCarIds.includes(element.carId)}
+  
+  console.log(cars);
+  console.log(favoriteCarIds);
+  
+  console.log(favorite);
   return (
     <div className="flex flex-col bg-black justify-center rounded-2xl mx-5 items-center py-6 gap-6">
       <h2
@@ -22,7 +29,8 @@ const CarsSections = ({ acc }) => {
       </h2>
       <div className="flex  flex-wrap justify-center max-w-[1111px] gap-3 max-h-[350px] overflow-scroll md:overflow-visible md:min-h-[700px]">
         {cars.slice(0, acc).map((car) => {
-          return <Card generic={true} car={car} key={car._id} />;
+        
+          return <Card generic={true} car={car} key={car._id} isCarFavorite={isCarFavorite(car)}/>;
         })}
       </div>
     </div>
