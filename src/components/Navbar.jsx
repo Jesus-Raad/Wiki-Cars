@@ -61,34 +61,33 @@ const Navbar = () => {
     }
   };
 
-  const [favorites, setFavorites] = useState([]);
+  const [userFavorites, setUserFavorites] = useState([]);
 
- useEffect(() => {
-  const fetchFavorites = async () => {
-    try {
-      const response = await fetch('/api/users', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          // Si necesitas autenticación, envía el token de usuario
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al obtener los favoritos');
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(
+          `https://wiki-cars.vercel.app/api/users`
+        );
+        const data = await response.json();
+        
+        // Filtramos el usuario autenticado
+        const currentUser = data.find((user) => user.userId.id === alsoUser.id);
+        if (currentUser && currentUser.favorites) {
+          setUserFavorites(currentUser.favorites); // Establecemos los favoritos del usuario autenticado
+        }
+      } catch (error) {
+        console.error("Error fetching car data:", error);
       }
+    };
 
-      const data = await response.json();
-      setFavorites(data.favorites); // Asegúrate de tener un estado de 'favorites'
-    } catch (error) {
-      console.error('Error al hacer el fetch de favoritos:', error);
+    if (alsoUser?.id) {
+      fetchUsers();
     }
-  };
-
-  fetchFavorites();
-}, []);
+  }, [alsoUser]);
 
 
+console.log(userFavorites);
 
 
   return (
@@ -113,8 +112,8 @@ const Navbar = () => {
             <div>
      {/* aqui quiero hacer un map de los coches favoritos del usuario y que rendericen la <card cardFav={true}> */}
    {/* Mapeamos los favoritos y renderizamos las mini tarjetas */}
-   {favorites.length > 0 ? (
-            favorites.map((carId) => (
+   {userFavorites.length > 0 ? (
+            userFavorites.map((carId) => (
               <Card key={carId} car={carId} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
             ))
           ) : (

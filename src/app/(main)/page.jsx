@@ -1,7 +1,6 @@
 import React from "react";
 import InfoUtilsWeb from "./InfoUtilsWeb";
 import CarsSections from "./CarsSections";
-import Footer from "./Footer";
 import LogosMerchsSections from "./LogosMerchsSections";
 
 const page = () => {
@@ -37,7 +36,7 @@ const page = () => {
       />
       <CarsSections acc={10} />
       <LogosMerchsSections/>
-      <Footer />
+      
     </>
   );
 };

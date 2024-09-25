@@ -80,7 +80,7 @@ const CarDetail = () => {
               height={120}
               width={450}
             />
-            <div className="flex flex-col bg-[#32363A] justify-center h-full w-full rounded-2xl mx-5 items-center py-6 gap-6">
+            <div className="flex flex-col bg-black justify-center h-full w-full rounded-2xl mx-5 items-center py-6 gap-6">
               <h2
                 className={`${kaushanScript.className} flex gap-24 items-center text-[#ef4444]  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
               >

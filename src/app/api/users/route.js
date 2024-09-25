@@ -4,25 +4,28 @@ import clientPromise from '../../../../lib/mongodb.mjs';
 
 
 
-export const GET = async (request) => {
+
+  export const  GET=async()=> {
     try {
       const client = await clientPromise;
       const db = client.db("wikiCars");
-      
-      const userId = request.headers.get("userId"); // Obtenemos el userId desde los headers
-  
-      // Comprobamos si el usuario existe
-      const user = await db.collection("users").findOne({ userId });
-  
-      if (!user || !user.favorites) {
-        return NextResponse.json({ favorites: [] }); // Si no hay usuario o no tiene favoritos, devolvemos un array vacío
-      }
-  
-      return NextResponse.json({ favorites: user.favorites });
+      const users = await db.collection("users").find({}).toArray();
+      return addCorsHeaders(NextResponse.json(users));
     } catch (e) {
-      return NextResponse.json({ error: 'Error al obtener favoritos' }, { status: 500 });
+    
+      return addCorsHeaders(NextResponse.json({ error: 'Error al obtener productos' }, { status: 500 }));
     }
-  };
+  }
+
+
+
+
+
+
+
+
+
+
 
 export const POST = async (request) => {
   try {

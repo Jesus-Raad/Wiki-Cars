@@ -239,14 +239,7 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
               <div
                 className={changeSide ? "w-full" : " flex w-full justify-end"}
               >
-                <div className=" w-fit cursor-pointer">
-                  <button
-                    onClick={hanldeInfoCar}
-                    className="flex  text-sm justify-center items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
-                  >
-                    Detalles
-                  </button>
-                </div>
+               
               </div>
               <div className="flex flex-col items-center gap-2  w-[70px] md:w-28  bg-white rounded-full px-2 absolute bottom-0 mb-32 ">
                 <Image
@@ -257,16 +250,26 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
                   objectFit="cover"
                 />
               </div>
-              <div className="mt-10">
+              <div className="flex flex-col items-center gap-3 mt-10">
+                <button
+                  onClick={hanldeInfoCar}
+                  className="flex w-fit text-sm justify-center items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                >
+                  Detalles
+                </button>
                 <ButtonsCar
                   style={"black"}
                   action={handleChangeBottom}
                   text={"Cambiar coche"}
-                />
+                /> 
+            
               </div>
             </div>
           )}
-         {cardFav && (
+        
+        </>
+      )}
+       {cardFav && (
   <div className="flex text-black">
     <Image
       width={40}
@@ -282,8 +285,6 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav }) => {
     </p>
   </div>
 )}
-        </>
-      )}
     </>
   );
 };

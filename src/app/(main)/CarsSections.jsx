@@ -14,7 +14,7 @@ const CarsSections = ({ acc }) => {
 
 
   return (
-    <div className="flex flex-col bg-[#32363A] justify-center rounded-2xl mx-5 items-center py-6 gap-6">
+    <div className="flex flex-col bg-black justify-center rounded-2xl mx-5 items-center py-6 gap-6">
       <h2
         className={`${kaushanScript.className} text-[#ef4444] pt-6 text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
       >
