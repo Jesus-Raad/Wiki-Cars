@@ -15,7 +15,7 @@ const kaushanScript = Kaushan_Script({
 });
 
 const CarDetail = () => {
-  const { carInfo } = useContext(WikiCars);
+  const { carInfo,favorite } = useContext(WikiCars);
 
   const [comments, setComments] = useState(carInfo?.commit || []);
 
@@ -58,6 +58,45 @@ const CarDetail = () => {
       console.error("Error al enviar el comentario:", error);
     }
   };
+ 
+//////////////////////fav
+
+const handleFavorite = async () => {
+  try {
+    // Asegúrate de que el ID de usuario esté disponible.
+    const userId = user || alsoUser;
+
+    if (!userId) {
+      console.error("User ID no disponible");
+      return;
+    }
+
+    const res = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, carId: car }),
+    });
+
+
+    
+    if (res.ok) {
+      
+      setIsFavorite(!isFavorite);
+    } else {
+      console.error('Error al manejar favorito');
+    }
+  } catch (error) {
+    console.error('Error al manejar favorito:', error);
+  }
+};
+
+  const favoriteCarIds = favorite.map(car => car.carId);
+
+
+  const carFavorite=() =>{ return favoriteCarIds.includes(carInfo?.carId)}
+
+  const isCarFavorite=carFavorite()
+
 
   return (
     <>
@@ -80,12 +119,18 @@ const CarDetail = () => {
               height={120}
               width={450}
             />
-            <div className="flex flex-col bg-black justify-center h-full w-full rounded-2xl mx-5 items-center py-6 gap-6">
+            <div className="flex flex-col bg-black justify-center h-full w-full rounded-lg mx-5 items-center py-6 gap-6">
               <h2
                 className={`${kaushanScript.className} flex gap-24 items-center text-[#ef4444]  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
               >
                 Comentarios
-                {user && <Star size={25} color="#ffffff" />}
+                {user &&    <Star
+          className="cursor-pointer"
+          size={22}
+          color={isCarFavorite===false? "#FFFFFF" :"#FF0000"  }
+           // Rojo si es favorito, blanco si no
+          onClick={handleFavorite}
+        />}
               </h2>
               {comments.length > 0 ? (
                 <div className="flex flex-col w-full items-start ">

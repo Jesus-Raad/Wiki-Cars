@@ -26,8 +26,12 @@ body {
   }
 }
 
-.no-scroll {
 
+::-webkit-scrollbar {
+  display: none;
+}
 
-  
+/* Asegúrate de que los elementos con scroll sigan siendo desplazables */
+#no-scroll  {
+  overflow: scroll; /* o auto si es necesario */
 }

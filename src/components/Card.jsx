@@ -16,6 +16,7 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav,isCarFavorite }
     secondChoice,
     setSecondChoice,
     changeForS,
+    setChangeForS,
   favorite,isFavorite, setIsFavorite
   } = useContext(WikiCars);
 
@@ -98,7 +99,7 @@ const Card = ({ animationComp, generic, car, changeSide, cardFav,isCarFavorite }
 
 
 
-console.log(`${car.model_name} ${isCarFavorite}`);
+
 
 
   return (
@@ -132,7 +133,8 @@ console.log(`${car.model_name} ${isCarFavorite}`);
         <Star
           className="cursor-pointer"
           size={17}
-          color={isCarFavorite===false? "#FFFFFF" :"#FF0000"  } // Rojo si es favorito, blanco si no
+          color={isCarFavorite===false? "#FFFFFF" :"#FF0000"  }
+           // Rojo si es favorito, blanco si no
           onClick={handleFavorite}
         />
       )}
@@ -157,18 +159,18 @@ console.log(`${car.model_name} ${isCarFavorite}`);
                   {car.model_seats ? car.model_seats : "N/D"}
                 </p>
               </div>
-              <div className=" flex justify-between items-center  z-10">
-                <div className="w-fit cursor-pointer">
+              <div className=" flex justify-evenly pt-3 items-center  z-10">
+                <div className=" w-fit  cursor-pointer">
                   <button
                     onClick={hanldeInfoCar}
-                    className="flex  text-sm justify-center items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                    className="flex  text-sm justify-center items-center px-2 py-1 rounded bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
                   >
                     Detalles
                   </button>
                 </div>
                 <button
                   onClick={changeForS ? handleFirstChoice : handleSecondChoice}
-                  className="flex text-white text-sm justify-center items-center px-2 py-1 rounded-full  bg-black    hover:bg-[#32363A] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                  className="flex text-white text-sm justify-center items-center px-2 py-1 rounded  bg-black    hover:bg-[#32363A] hover:scale-105  hover:shadow-lg  transition-all duration-300"
                 >
                   Comparar
                 </button>
@@ -255,7 +257,7 @@ console.log(`${car.model_name} ${isCarFavorite}`);
               <div className="flex flex-col items-center gap-3 mt-10">
                 <button
                   onClick={hanldeInfoCar}
-                  className="flex w-fit text-sm justify-center items-center px-2 py-1 rounded-full bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
+                  className="flex w-fit text-sm justify-center items-center px-2 py-1 rounded bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  transition-all duration-300"
                 >
                   Detalles
                 </button>
@@ -276,7 +278,7 @@ console.log(`${car.model_name} ${isCarFavorite}`);
     <div className="rounded-full bg-white">
 
     <Image
-      width={40}
+      width={60}
       height={40}
       src={`/img/${car.model_name}${car.model_year}png.png`}
       alt={"miniIcon"}
@@ -285,9 +287,15 @@ console.log(`${car.model_name} ${isCarFavorite}`);
       }}
     />
     </div>
-    <p>
+    <p className="flex justify-center items-center text-lg font-bold w-full">
       {car.model_name} ({car.model_year})
     </p>
+    <button
+                    onClick={hanldeInfoCar}
+                    className="flex  text-xs justify-center items-center px-2 py-1 rounded bg-[#ef4444]  text-white   hover:bg-[#ff4b4b] hover:scale-105  hover:shadow-lg  "
+                  >
+                    Detalles
+                  </button>
   </div>
 )}
     </>

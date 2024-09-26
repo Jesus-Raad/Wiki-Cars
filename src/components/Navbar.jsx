@@ -103,14 +103,14 @@ const Navbar = () => {
               <Logo width={65} height={56} />
             </Link>
           </div>
-          <div
+          <div id="no-scroll"
             className={
               visibleFavSectionCondition
-                ? " flex flex-col absolute max-w-[314px] min-w-[200px] md:min-w-[300px] max-h-[391.37px] min-h-[270px] overflow-scroll  bg-[white]  gap-5 p-2 rounded-lg border-red-500 border-[3px]  shadow-2xl shadow-black  right-5 top-16    "
+                ? " flex flex-col absolute max-w-[314px] min-w-[200px] md:min-w-[300px] max-h-[391.37px] min-h-[270px] overflow-scroll  bg-[white]  gap-5 p-2 rounded-lg border-red-500 border-[3px]  shadow-2xl shadow-black  right-1 md:right-5 top-16    "
                 : " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white] invisible gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]"
             }
           >
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between p-2 items-center">
             <h2
         className={` ${kaushanScript.className} text-black  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
       >
@@ -122,7 +122,7 @@ const Navbar = () => {
                 color=" #ef4444"
               />
             </div>
-            <div className="flex flex-col gap-2 ">
+            <div  className="flex flex-col  gap-2  ">
               {/* aqui quiero hacer un map de los coches favoritos del usuario y que rendericen la <card cardFav={true}> */}
               {/* Mapeamos los favoritos y renderizamos las mini tarjetas */}
               {favorite.length > 0 ? (
@@ -130,7 +130,7 @@ const Navbar = () => {
                   <Card key={car} car={car} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
                 ))
               ) : (
-                <p className="text-black">No tienes coches favoritos aún.</p>
+                <p className=" flex justify-center text-black">No tienes coches favoritos aún.</p>
               )}
             </div>
           </div>
