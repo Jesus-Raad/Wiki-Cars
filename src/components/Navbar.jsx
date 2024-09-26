@@ -15,6 +15,7 @@ import SearcFilter from "./SearcFilter";
 import Link from "next/link";
 import Card from "./Card";
 import { Kaushan_Script } from "next/font/google";
+import Tecnologys from "./Tecnologys";
 
 const kaushanScript = Kaushan_Script({
   weight: "400", // Puedes especificar el peso si es necesario
@@ -38,7 +39,8 @@ const Navbar = () => {
     favorite,
     setFavorite,
     isFavorite,
-    setIsFavorite,
+    visibleTecnologysSection,
+    setVisibleTecnologysSection,
   } = useContext(WikiCars);
 
   const handleVisibleFavSectionCondition = () => {
@@ -46,6 +48,7 @@ const Navbar = () => {
       setVisibleFavSectionCondition(false);
     } else {
       setVisibleFavSectionCondition(true);
+      setVisibleTecnologysSection(false)
       setVisibleMenuCondition(false);
       setIsSearchSection(false);
     }
@@ -55,7 +58,7 @@ const Navbar = () => {
       setVisibleMenuCondition(false);
     } else {
       setVisibleFavSectionCondition(false);
-
+      setVisibleTecnologysSection(false)
       setVisibleMenuCondition(true);
       setIsSearchSection(false);
     }
@@ -66,9 +69,21 @@ const Navbar = () => {
       setIsSearchSection(false);
     } else {
       setVisibleFavSectionCondition(false);
-
+      setVisibleTecnologysSection(false)
       setVisibleMenuCondition(false);
       setIsSearchSection(true);
+    }
+  };
+  const handleVisibleTecnologysSection = () => {
+    if (visibleTecnologysSection === true) {
+      setVisibleTecnologysSection(false)
+    } else {
+      setVisibleTecnologysSection(true)
+      setIsSearchSection(false);
+      setVisibleFavSectionCondition(false);
+
+      setVisibleMenuCondition(false);
+      setIsSearchSection(false);
     }
   };
 
@@ -84,7 +99,7 @@ const Navbar = () => {
       });
 
       const data = await response.json();
-      
+
       setFavorite(data.favorites);
     };
 
@@ -92,7 +107,6 @@ const Navbar = () => {
       fetchFavorites();
     }
   }, [alsoUser, isFavorite]);
- 
 
   return (
     <nav className="bg-black fixed z-50 top-0 w-screen shadow-xl">
@@ -103,7 +117,8 @@ const Navbar = () => {
               <Logo width={65} height={56} />
             </Link>
           </div>
-          <div id="no-scroll"
+          <div
+            id="no-scroll"
             className={
               visibleFavSectionCondition
                 ? " flex flex-col absolute max-w-[314px] min-w-[200px] md:min-w-[300px] max-h-[391.37px] min-h-[270px] overflow-scroll  bg-[white]  gap-5 p-2 rounded-lg border-red-500 border-[3px]  shadow-2xl shadow-black  right-1 md:right-5 top-16    "
@@ -111,18 +126,18 @@ const Navbar = () => {
             }
           >
             <div className="flex justify-between p-2 items-center">
-            <h2
-        className={` ${kaushanScript.className} text-black  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
-      >
-        Fav Cars{" "}
-      </h2>
-       <X
+              <h2
+                className={` ${kaushanScript.className} text-black  text-2xl leading-7 font-medium sm:text-3xl  md:text-4xl   lg:text-5xl lg:font-semibold lg:leading-6`}
+              >
+                Fav Cars{" "}
+              </h2>
+              <X
                 onClick={handleVisibleFavSectionCondition}
                 size={18}
                 color=" #ef4444"
               />
             </div>
-            <div  className="flex flex-col  gap-2  ">
+            <div className="flex flex-col  gap-2  ">
               {/* aqui quiero hacer un map de los coches favoritos del usuario y que rendericen la <card cardFav={true}> */}
               {/* Mapeamos los favoritos y renderizamos las mini tarjetas */}
               {favorite.length > 0 ? (
@@ -130,13 +145,31 @@ const Navbar = () => {
                   <Card key={car} car={car} cardFav={true} /> // cardFav renderiza la tarjeta en su formato pequeño
                 ))
               ) : (
-                <p className=" flex justify-center text-black">No tienes coches favoritos aún.</p>
+                <p className=" flex justify-center text-black">
+                  No tienes coches favoritos aún.
+                </p>
               )}
             </div>
+          </div>
+          <div
+          
+            className={
+              visibleTecnologysSection
+                ? " flex flex-col  absolute w-screen h-screen overflow-scroll bg-white/10 backdrop-blur-lg  gap-5 p-2   shadow-2xl shadow-black   top-16  left-0  "
+                : " flex flex-col absolute w-[314px] max-h-[391.37px] min-h-[270px] bg-[white] invisible gap-5 p-2 rounded-lg border-[#000000] border-solid border-[1px] right-5 top-[70px]"
+            }
+          >
+
+            <Tecnologys/>
           </div>
           <div className="md:flex md:items-center md:gap-12">
             <div aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
+                <li>
+                  <button onClick={handleVisibleTecnologysSection} className="text-black transition hover:text-red-500">
+                    Tecnologias
+                  </button>
+                </li>
                 <li>
                   <div className="text-white transition cursor-pointer hover:text-red-500">
                     {" "}
